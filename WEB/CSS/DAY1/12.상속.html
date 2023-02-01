@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            border:1px solid black;
+            /* text-align, font-size, color는 상속, %를 활용한 width */
+            color:red;
+            text-align: center;
+            width:200px;
+
+        }
+        .box{
+            border:1px solid black;
+            width: 50%; 
+            /* %를 활용하면 부모, 즉 container class width의 50%가 된다 */
+        }
+    </style>
+</head>
+<body>
+    <!-- .container>.box*2 -->
+    
+    <div class="container">
+        <div class="box">a</div>
+        <div class="box">b</div>
+    </div>
+</body>
+</html>

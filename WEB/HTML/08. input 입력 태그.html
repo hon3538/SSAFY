@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 열린태그+닫힌태그 형태 -->
+    <!-- type ctrl+spacebar 하면 자동완성-->
+    <input type="" placeholder=""><br>
+    <input type="date"><br>
+    <input type="password" placeholder="pwd"><br>
+    <!-- value -->
+    <input type="text" value="안녕"><br>
+    <!-- placeholder -->
+    <input type="text" placeholder="아이디를 입력하세요"><br>
+    <!-- radio 
+        한가지만 선택이 가능한 버튼
+        <input type="radio" name="그룹명">
+        name으로 그룹으로 묶어서 나타낸다.
+        그룹명이 같으면 같은 그룹내에서 한 가지만 선택된다.
+    -->
+    자바반:<input name="class" type="radio" value="java"><br>
+    파이썬반:<input name="class" type="radio" value="python"><br>
+    임베디드반:<input name="class" type="radio" value="imbedded"><br>
+    
+    <!-- checkbox 
+        다중 선택이 가능하다
+        name으로 그루핑을 해야 나중에 데이터를 전달할 때 쉽게 관리가능
+        checked 옵션을 활용하면 체크가 된채로 시작
+    -->
+    <p>
+        치킨<input type="checkbox" value="chicken" name="food">
+        삼겹살<input type="checkbox" value="삼겹" name="food" checked>
+    </p>
+    <!-- submit 
+        form태그 안에서 활용
+        서버에 제출하기 위한 버튼
+        value를 지정하지 않으면 기본값이 제출로 표시
+        클릭시 새로고침이 일어난다.
+    -->
+    <input type="submit" value="제출하기">
+    <!-- button 
+        버튼으로 활용하기 위한 input 태그
+        value가 없으면 빈값이 나온다.
+    -->
+    <input type="button" value="버튼">
+    <button>버튼2</button>
+    <!-- 일반 버튼도 있음 ㅋ 비슷함 -->
+</body>
+</html>

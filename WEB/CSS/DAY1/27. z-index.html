@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width:120px;
+            height:120px;
+            position:absolute;
+        }
+        .a{
+            background-color: red;
+            top:20px;
+            left:200px;
+            /* z-index는 3차원 요소에서만 동작 */
+            /* z-index에 큰값을 부여할수록 겹쳤을 때 더 우선순위가 높다 */
+            z-index: 10;
+        }
+        .b{
+            background-color: green;
+            top:50px;
+            left:230px;
+            z-index: 1;
+        }
+        .c{
+            background-color: blue;
+            top:80px;
+            left:260px;
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+    <div class="box a"></div>
+    <div class="box b"></div>
+    <div class="box c"></div>
+</body>
+</html>

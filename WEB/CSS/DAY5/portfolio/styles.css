@@ -1,0 +1,97 @@
+.navbar-brand{
+    padding-right: 30px;
+}
+.closing{
+    color:#5f6168;
+    
+}
+.closing:hover{
+    color: rgba(255, 255, 255, 0.55);
+}
+/* main img class */
+.carousel-item>img{
+     /*vw, vh 는 
+        브라우저 크기에 대응하고
+        %는 부모의 크기에 영향을 받는다  */
+    height:100vh;
+
+}
+nav{
+    z-index: 10;
+}
+.text-effect:hover{
+    position: absolute;
+    transform: translate(10%,0%) scale(110%);
+    
+    transition: transform 0.5s;
+}
+
+/* skill */
+.skill-list{
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    justify-content: center;
+}
+.list-group-item{
+height: 42px;
+}
+
+
+/* stack */
+.sort-center{
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+}
+table{
+    min-width:700px;
+}
+.table-level{
+    width:120px;
+}
+
+/* effect */
+.effect-turn-text{
+    transform:rotate(1turn);
+    transition:transform 1s;
+}
+
+section:hover{
+    /* background-image: url(./images2/main1.jpg); */
+    background-color: rgb(188, 247, 247); 
+    opacity: 1;
+    transition:3s;
+    
+}
+
+/* section:hover:before{
+    
+    opacity: 1;
+    transition:1s;
+} */
+
+/* ul li a:hover .icon {
+    color: #fff;
+    transform: rotateY(360deg);
+  }
+  
+  ul li a:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f00;
+    transition: .5s;
+    z-index: 2;
+  }
+  
+  ul li a:hover:before {
+    top: 0;
+  }
+   */

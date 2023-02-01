@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- input:checkbox*3 --> 
+    <input type="checkbox" name="city" value="서울" checked id=""> 서울
+    <input type="checkbox" name="city" value="경기" checked id=""> 경기
+    <input type="checkbox" name="city" value="제주" id=""> 제주
+    <script>
+        const checkbox=document.querySelectorAll("input");
+        console.log(checkbox);
+
+        // checked 인 경우만 가져오기
+        const checkedInputs = document.querySelectorAll("input:checked");
+        console.log(checkedInputs);
+
+        //name city인 경우
+        const checkedName=document.querySelectorAll("input[name=city]");
+        console.log(checkedName);
+
+        //value 가져오기
+        const checkedValue=document.querySelectorAll("input:checked[value=서울]");
+        console.log(checkedValue);
+    </script>
+</body> 
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 브라우저에서 클릭같은 event(사건) 발생시에 지정된 함수가 호출하도록 함-->
+
+    <button id="btn">고고</button>
+    
+    <!-- inline 방식으로 Vue, react에서 많이 사용 -->
+    <button onclick="hello()">가보자고ㅋ</button>
+    <script>
+        const button=document.querySelector("#btn");
+        // 이벤트 추가
+        // 요소.addEventListener('지정된 이벤트',콜백함수 or 이벤트핸들러)
+        // 이벤트 핸들러란, 콜백함수 중 용도를 더 명확하게 나타낸 용어이다. 콜백함수가 더 큰범위
+        // button.addEventListener('click',function(){
+        //     console.log("가보자고~");
+        // })
+        
+        button.addEventListener('click',hello);
+        
+        // 아래 함수는 hoisting돼서 에러 안 남.. 
+        // 그래도 웬만하면 함수는 위에 작성하는것이 좋음
+        function hello(){
+            console.log("헬로");
+        }
+        </script>
+</body>
+</html>

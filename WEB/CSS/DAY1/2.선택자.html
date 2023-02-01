@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            /* 전체 선택자
+                모든 태그에 적용 */
+            color:blue;
+        }   
+        /* 유형 선택자
+            태그명에 대입 */
+        div{
+            color:#b51919;
+        }
+        /* class 선택자
+            중복으로 선택이 가능
+            .으로 표시 */
+        .abc{
+            color:aquamarine;
+        } 
+        /* id 선택자 
+            중복 X
+            #으로 접근 */
+        #test{
+            color:blueviolet;
+        }    
+    </style>
+</head>
+<body>
+    <div>
+        a
+    </div>
+    <p class="abc">
+        b
+    </p>
+    <h2 id="test">
+        c
+    </h2>
+    <div class="abc">
+        hello
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input class="input1" type="text">
+    <div class="result1"></div>
+    <br><br><br>
+    <input class="input2" type="text">
+    <div class="result2"></div>
+
+    <script>
+        //*tip : 커서를 단어에 올리고 ctrl+D D D...를 누르면 
+        // 같은 이름들 한번에 수정가능
+
+        //keydown 
+        //키보드를 눌렀을 때
+        const input1=document.querySelector('.input1');
+        const result1=document.querySelector('.result1');
+        input1.addEventListener('keydown',function(e){
+            // console.log(e.target);
+            console.log(e.target.value);
+            console.log(e.code);
+            result1.textContent=e.code;
+        })
+        //keyup
+        //키보드를 눌렀다 뗐을 때
+        const input2=document.querySelector('.input2');
+        const result2=document.querySelector('.result2');
+        input2.addEventListener('keyup',function(e){
+            console.log(e.target.value);
+            console.log(e.code);
+            result2.textContent=e.code.split("y")[1];
+        })
+    </script>
+</body>
+</html>

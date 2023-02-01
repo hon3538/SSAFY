@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height:1200px;
+        }
+        .absolute{
+            background-color: beige;
+            /* fixed같이 선언시 width가 inline 형태로 줄어든다
+                하지만 fixed와 다르게 고정되지 않는다. */
+            position:absolute;
+            /* relative : 원래 위치가 기준점
+               fixed : 원래 위치와 상관없이 최상위가 기준점
+               abolute : 선택적(부모 요소에 3차원 요소가 있다면 그 요소가 기준점,
+               3차원 요소가 없다면 그 상위가 기준점, 끝까지 없으면 최상위가 기준점) */
+            right:10px;
+        }
+        .parent{
+            position:relative;
+            /* position을 주석처리하면 child의 position이
+                absolute로 되어 있기 때문에 부모가 기준이 아닌
+                상위로 올라가면서 기준을 찾는다. 여기선 끝까지 포지션
+                요소가 없으므로 body를 기준으로 위치한다. */
+            width:300px;
+            height:300px;
+            background-color:aqua;
+        }
+        .child{
+            position:absolute;
+            right:10px;
+            bottom:0;
+            background-color: brown;
+        }
+    </style>
+</head>
+<body>
+    <div class="absolute">
+        absolute
+    </div>
+
+    <div class="parent">
+        <div class="child">child</div>
+    </div>
+</body>
+</html>

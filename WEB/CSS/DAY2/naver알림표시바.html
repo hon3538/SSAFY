@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .notification-wrapper{
+            width: 300px;
+            height:60px;
+            border: 1px solid gray;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        /* 직계 자식*/
+        .notification-wrapper>div{
+            flex:1;
+        }
+        .avatar-wrapper{
+            display: flex;
+            /* justify-content: space-around; */
+            align-items: center;
+            padding-left: 10px;
+            
+            flex:2 !important;
+        }
+        .avatar{
+            background-image: url(../../images/images-naver-profile/chicken.jpg);
+            width: 40px;
+            height: 40px;
+            background-size:cover;
+            border-radius: 50%;
+
+        }
+        .notification{
+            background-image: url(../../images/images-naver-profile/bell.png);
+            width:30px;
+            height:30px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            
+        }
+        .email-notification{
+            position:relative;
+            top:3px;
+
+        }
+        .menu{
+            background-image: url(../../images/images-naver-profile/grid.png);
+            width: 30px;
+            height: 30px;
+            background-size: contain;
+            background-repeat:no-repeat;
+        }
+        .email-count{
+            color:white;
+            background-color: green;
+            position: absolute;
+            top:-5px;
+            right:10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="notification-wrapper">
+        <!-- 아바타 이름 -->
+        <div class="avatar-wrapper">
+            <div class="avatar"></div>
+            <div style="margin-left: 10px;">홍의선</div>
+        </div>
+        <!-- 알림 -->
+        <div class="notification"></div>
+        <!-- 이메일 -->
+        <div class="email-notification">
+            <img src="../../images/images-naver-profile/mail.png" width="30px" height="30px">
+            <div class="email-count">
+                99+
+            </div>
+        </div>
+        <!-- 메뉴 -->
+        <div class="menu"></div>
+    </div>
+</body>
+</html>

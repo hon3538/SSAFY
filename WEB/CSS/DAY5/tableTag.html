@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 과거에는 table 태그로 레이아웃을 짰다 -->
+    <table border="1">
+        <!-- thead 분류등을 정의 -->
+        <thead>
+            <th>분야</th>
+            <th>분류</th>
+            <th>이름</th>
+        </thead>
+        <!-- tbody 내용을 정의-->
+        <tbody>
+            <!-- 행 열 -->
+            <!-- 열(col) 병합 -->
+            <tr>
+                <td colspan="2">테스트1</td>
+                <td>테스트2</td>
+                <!-- <td>테스트3</td> -->
+            </tr>
+            <tr>
+                <!-- 행(row) 병합-->
+                <td rowspan="2">테스트1</td>
+                <td>테스트2</td>
+                <td>테스트3</td>
+            </tr>
+            <tr>
+                <!-- <td>테스트1</td> -->
+                <td>테스트2</td>
+                <td>테스트3</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

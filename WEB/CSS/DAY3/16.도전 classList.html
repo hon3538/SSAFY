@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bg-color{
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div>
+     <button>1</button>
+    <button>2</button>
+    <button>3</button> 
+    </div> -->
+    <button class="btn-add">추가</button>
+    <button class="btn-rm">제거</button>
+    <button class="btn-tg">토글</button>
+    <script>
+        // const buttons=document.querySelectorAll("button");
+        
+        // buttons[0].addEventListener('click',function(){
+        //     div.classList.add('bg-color');
+        // })
+        // buttons[1].addEventListener('click',function(){
+        //     div.classList.remove('bg-color');
+        // })
+        // buttons[2].addEventListener('click',function(){
+        //     div.classList.toggle('bg-color');
+        // })
+            const buttonAdd=document.querySelector('.btn-add');
+            const buttonRM=document.querySelector(".brn-rm");
+            const buttonTG=document.querySelector(".btn-tg");
+            const body=document.querySelector("body");
+
+            buttonAdd.addEventListener('click',function(){
+                body.classList.add('bg-color');
+            })
+
+    </script>
+</body>
+</html>

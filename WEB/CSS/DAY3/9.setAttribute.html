@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a class="test" href="https://www.naver.com">네이버로 가는 문</a>
+    <script>
+        // .src
+        // .href
+        // set/getAttribute를 활용
+        const a=document.querySelector('a');
+        // 요소.getAttribute('속성');
+        console.log(a.getAttribute('href'));
+        // console.log(a.getAttribute('class'));
+        // getAttribute로 class 도 알 수 있다.
+        
+        console.log(a.href);
+        // 둘이 똑같은데 위 방식을 권장함
+
+        // get이 있으면 set이 있다
+        //  요소.setAttribute('속성',바꿀값) ->속성을 바꿀 수 있음
+        a.setAttribute('href','https://www.daum.net');
+        a.href="https://www.youtube.com/";
+        // a.setAtribute('class','test'); 클래스도 바꾸거나 추가해줄 수 있음
+
+
+        // getAttribute로 class 도 알 수 있다.
+        console.log(a.getAttribute('class'));
+
+    </script>
+</body>
+</html>

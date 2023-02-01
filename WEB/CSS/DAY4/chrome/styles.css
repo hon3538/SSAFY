@@ -1,0 +1,151 @@
+*{
+    /* width를 책정할 때 기본적으로는 테투리의 두께통을 고려하지 않고 측정
+        border-box옵션을 주게되면 테두리 두께까지 고려해서 길이가 측정된다.
+    */
+    box-sizing: border-box;
+    border:1px solid black;
+}
+/* 다크모드를 줄때 black */
+body{
+    background-color:white;
+}
+
+/* header */
+.header-nav-list-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    /* margin-left:auto */
+    padding:0;
+    /* li의 dot파트 없애는 법 */
+    list-style:none;
+    align-items: center;
+}
+.header-nav-list-wrapper>li{
+    margin: 10px;
+}
+.toggle-button{
+    border: 1px solid #eee;
+    background-color: black;
+    color:white;
+    padding:3px 8px;
+    border-radius: 5px;
+    /* cursor를 올리면 효과 */
+    cursor:pointer;
+}
+/* main */
+.main-container{
+    /* 이미지 정렬도 텍스트 정렬 영향 받음 */
+    text-align: center;
+    width:50%;
+    position: absolute;
+    /* 상자를 50%이동시키면 왼쪽 위 점을 기준으로 이동하기 때문에
+    중앙에 배치되지 않는다 */
+    left:50%;
+    top:40%;
+    /* 따라서 transform 이용
+    transform의 기준점역시 default는 왼쪽위 점을 기준으로 하기때문에
+    -50%씩 뒤로 이동시키면 중앙에 위치하게 됨
+    %는 자신의 박스 크기를 기준으로함*/
+    transform:translate(-50%,-50%);
+    /* border:1px solid black; */
+    min-width: 500px;
+    max-width: 800px;
+}
+/* 로고 */
+.image-logo{
+    width:272px;
+}
+/* 검색 */
+.search-container{
+    position:relative;
+    margin-top:50px;
+    
+    /* border-radius: 50px;
+    border:1px solid #ddd;
+    height: 44px; */
+}
+.search-icon{
+    width:17px;
+    
+    position:absolute;
+    top:13px;
+    left:10px;
+}
+#search-input{
+    padding-left: 40px;
+    width: 100%;
+    border-radius: 50px;
+    border:1px solid #ddd;
+    height: 44px;
+    /* min-width: 500px; */
+}
+/* 아이콘 */
+.bookmark-section{
+    margin-top:40px;
+    display: flex;
+    justify-content: center;
+    
+}
+.bookmark-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* 최대 최소로 늘어날 수 있는 크기 */
+    /* max-width:30%;
+    min-width:30%; */
+    max-width:600px;
+    min-width:430px;
+    
+}
+.bookmark-item{
+    width:100px;
+    /* text link에 대한 밑줄 없애줌 */
+    text-decoration:none;
+    text-align:center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin:5px;
+    padding:0;
+    
+}
+.img-icon-wrapper{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background-color:#f2f3f5;
+    font-size:24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.img-icon-wrapper>img{
+    width: 60%;
+    height: 60%;
+}
+.bookmark-text{
+    margin-top:5px;
+    color: black;
+}
+/* 마우스를 가져다가 올려놀때 */
+.bookmark-item:hover{
+    cursor:pointer;
+    /* 추명도 최대1, 높을수록 불투명 */
+    opacity: 0.5;
+}
+/* 다크모드 */
+.body-background-darkmode{
+    background-color: black;
+}
+.toggle-button-darkmode{
+    background-color: white;
+    color: black;
+}
+.img-icon-wrapper-darkmode{
+    background-color: white;
+}
+.text-darkmode{
+    color:white;
+}
+

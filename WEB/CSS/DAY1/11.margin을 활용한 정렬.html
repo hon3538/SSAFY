@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            border:1px solid black;
+            width:120px;
+            height:120px;
+        }
+        .aa{
+            /* auto는 자동으로 쭈욱 민다고 생각하면됨
+                따라서 margin-left는 왼쪽으로 쭉 밈 */
+            margin-left: auto;
+            
+        }
+        .bb{
+            margin:0 auto;
+            /* 양 옆이 둘 다 auto라서 반반 정렬되기 때문에 가운데 정렬이 됨 */
+        }
+        .cc{
+            margin-right:auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- 글씨정렬은 배웠는데 각 태그 정렬은? -->
+    <div class="box aa">aa</div>
+    <div class="box bb">bb</div>
+    <div class="box cc">cc</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .hello{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <!-- classList
+    class만 control 할 수 있다.
+
+    setAttribute는 class 여러개 있으면 어려울 수 있다.
+    그래서 class 추가/제거 하면서 활용 가능
+    -->
+        
+   
+
+    <div>Hello</div>
+    <div>Bye</div>
+    <script>
+        //qeury는 selector의 경우 맨 처음 나오는 하나만 선택한다.
+        const div=document.querySelector('div');
+        
+        // 요소.classList.add
+        div.classList.add('hello');
+        // 요소.classList.remove('지울클래스')
+        div.classList.remove('hello');
+
+        // 요소.classList.toggle('클래스')
+        // 있으면 제거, 없으면 추가해준다
+        div.classList.toggle('hello');
+        //div.classList.toggle('hello');
+        // 요소.classList.conains
+        // 있으면 true 없으면 false
+        console.log(div.classList.contains('hello'));
+
+        // 요소.classList.replace(old,new)
+        // old ->new 클래스로 변경
+        //div.classList.replace('hello','abc')
+    </script>
+</body>
+</html>

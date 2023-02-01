@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // const button=[];
+        // const a=document.querySelector('body');
+        // for(let i=0;i<5;i++){
+        //     button[i]=document.createElement("button"); 
+        //     button[i].textContent="버튼"+i+1;
+        //     button[i].setAttribute('class','btns');
+        //     a.append(button[i]);
+        // }
+        
+        // const allBtn=document.querySelectorAll('.btns');
+        // let n=0;
+        // for(let i=0;i<allBtn.length;i++){
+        //     allBtn[i].addEventListener('click',function(){
+        //         alert(n++);
+        //    })
+        // }
+
+        // 아래는 교수님 방식
+         const body=document.querySelector('body');
+         for(let i=0;i<5;i++){
+            const button = document.createElement('button');
+            // const 는 block기반타입 이라 포문이 한번 돌면 없어지므로 재선언 가능
+            button.setAttribute('class','button');
+            button.textContent="버튼"+String(i);
+            body.append(button);
+         }
+         const buttons=document.querySelectorAll('.button');
+        
+         for(let i=0;i<buttons.length;i++){
+            buttons[i].addEventListener('click',function(){
+                alert("안녕"+buttons[i].textContent);
+            })
+         }
+
+    </script>
+</body>
+</html>

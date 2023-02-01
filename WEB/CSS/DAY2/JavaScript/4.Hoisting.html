@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 변수의 호이스팅, 변수의 선언문을 런타임이전에 맨위로 끌고 올라감
+        console.log(greeting);
+        var greeting=20;
+        // 따라서 위 코드는 선언부가 뒤에 있음에도 에러발생하지 않음
+        //let, const는 호이스팅이 동작하지만 내부적으로 동작을 막는다.
+        
+        //함수의 호이스팅는 두 가지가 있음
+        //1. 함수 선언식, 함수 선언부를 위로 끌어올림 -> 정상 동작
+        hello();
+        function hello(){
+            console.log("Hello");
+        }
+        // 2. 함수 표현식, 함수가 아닌 변수를 위로 올림 -> 에러 발생
+        hi();
+        var hi=function(){
+            console.log("Hi");
+        }
+        
+
+    </script>
+</body>
+</html>

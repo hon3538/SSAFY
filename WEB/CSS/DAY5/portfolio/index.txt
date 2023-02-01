@@ -1,0 +1,36 @@
+//about
+//text turn
+const sectionAbout=document.querySelector("#about");
+const aboutText=document.querySelector(".text-about");
+
+sectionAbout.addEventListener('mouseover',function(e){
+    aboutText.classList.add('effect-turn-text');
+})
+sectionAbout.addEventListener('mouseleave',function(){
+    aboutText.classList.remove('effect-turn-text');
+})
+
+// background color
+
+
+
+// skill
+const sectionSkill=document.querySelector("#skill");
+const skillText=document.querySelector(".text-skill");
+
+sectionSkill.addEventListener('mouseover',function(e){
+    skillText.classList.add('effect-turn-text');
+})
+sectionSkill.addEventListener('mouseleave',function(){
+    skillText.classList.remove('effect-turn-text');
+})
+// stack
+const sectionStack=document.querySelector("#stack");
+const stackText=document.querySelector(".text-stack");
+
+sectionStack.addEventListener('mouseover',function(e){
+    stackText.classList.add('effect-turn-text');
+})
+sectionSkill.addEventListener('mouseleave',function(){
+    stackText.classList.remove('effect-turn-text');
+})

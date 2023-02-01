@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- change event를  select 에서 사용하기 -->
+    이상형 월드컵
+    <select name="" id="">
+        <option value="가">가</option>
+        <option value="라">라</option>
+        <option value="다">다</option>
+        <option value="나">나</option>
+        <option value="까">까</option>
+    </select>
+    <div class="result"></div>
+    <script>
+        const result=document.querySelector('.result');
+        const select=document.querySelector('select');
+        select.addEventListener('change',function(){
+            result.textContent=select.value;
+        })
+    </script>
+</body>
+</html>

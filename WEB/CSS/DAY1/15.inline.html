@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            border:1px solid black;
+        }
+        span{
+            padding-bottom:30px;
+            margin-bottom:30px;
+            width:400px;
+            height:400px
+            /* 이모든게 먹히지 않는다*/ 
+        }
+        /* 다른 속성을 inline으로 만들고싶을 때 display:inline */
+        div{
+            display:inline;
+        }
+    </style>
+</head>
+<body>
+    <!-- inline 요소란?
+        줄바꿈 없이 나란히 배치된다
+     -->
+    <!-- 대표적인 inline 태그 
+        <span> <a> 태그
+        width, height가 제대로 동작하지 않는다
+        margin top, bottom의 간격 지정이 불가능하다    
+    -->
+    <span>테스트</span>
+    <a href="">네이버</a>
+    <div>hello</div>
+    
+</body>
+</html>

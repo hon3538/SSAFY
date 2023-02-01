@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- javaScript 호출 방법 
+    1. script 활용(body 태그의 상단)
+    -->
+</head>
+<body>
+    <script>
+        console.log("hello")
+        // var -> 재할당이 가능
+        // 변수를 다시 선언하는 것도 가능
+        // 함수 레벨 스코프, function() { }
+        // -> 함수 내에 선언된 변수는 밖에서 사용 불가능
+        // 근데 함수레벨 스코프 뿐만 아니라 모든 변수가 그냥 불가능
+        // var같은 경우는 블록내에서 선언되도 밖에서 쓸 수 있음
+        // 근데 const나 let은 블록내에서 선언되면 밖에서 쓸 수 없음
+        // 그차이임
+        function hello(){
+            var a=5;
+            console.log(a);
+        }
+        hello();
+        console.log(a);
+
+        {
+            var b=5;
+        }
+        console.log(b)=5;
+        // let
+        // 재할당이 가능
+        // 블록 레벨 스코프, { }
+        let c=5;
+        c=5;
+
+        {let d=5;}
+        console.log(c)
+        // const
+        // 재할당 불가능
+        // 블록 레벨 스코프
+    </script>
+    
+    <!--  js파일을 가져오는 방식 -->
+    <script src="./test.js"></script>
+</body>
+</html>

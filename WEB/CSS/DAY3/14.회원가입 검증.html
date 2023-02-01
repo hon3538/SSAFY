@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .signup-form{
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+
+            /* 브라우저 크기 퍼센트 */
+            max-width:40vh;
+            border: 3px solid black;
+            padding:20px;
+        }
+    </style>
+</head>
+<body>
+    <form class="signup-form">
+        아이디<input type="text" class="id">
+        비밀번호<input type="password" class="pwd">
+        <button type="button" class="signup">가입하기</button>
+    </form>
+
+    <script>
+        const id=document.querySelector(".id");
+        const pwd=document.querySelector(".pwd");
+        const signupButton=document.querySelector(".signup");
+
+        signupButton.addEventListener('click',function(){
+            //null, undefined, "", 0, false -> 부정의 의미
+            // 이외에는 모두 긍정의 의미
+            // if(id!== undefined&&id!==null&&id!==""...) 이러면 코드가 너무 길어짐
+            if(id.value&&pwd.value){
+                alert("회원가입이 완료되었습니다.");
+            }else{
+                if(!id.value){
+                    alert("id를 입력해주세요");
+                }
+                if(id.value&&!pwd.value){
+                    alert("password를 입력해주세요.");
+                }
+            }        
+        })
+    </script>
+</body>
+</html>
+
+	
+오후 5:26
+
+
+
+
+
+<!-- 회원가입 전체코드 -->
+<!-- <!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <input type="id" class="id" />
+      <br />
+      <input type="password" class="password" />
+      <br />
+      <input type="password" class="password-check" /><span
+        class="password-status"
+      ></span>
+      <br />
+      <input type="checkbox" class="check-input" />
+      <button class="signup">회원가입</button>
+    </div>
+    <script>
+      const id = document.querySelector(".id");
+      const password = document.querySelector(".password");
+      const passwordCheck = document.querySelector(".password-check");
+      const signup = document.querySelector(".signup");
+      const passwordStatus = document.querySelector(".password-status");
+      const checkInput = document.querySelector(".check-input");
+      console.log(checkInput.checked);
+
+      signup.addEventListener("click", function () {
+        if (
+          id.value &&
+          password.value &&
+          passwordCheck.value &&
+          checkInput.checked
+        ) {
+          if (password.value === passwordCheck.value) {
+            alert("회원가입이 완료되었습니다 ");
+          } else {
+            alert("비밀번호가 서로 일치하지않습니다.");
+          }
+        } else {
+          if (!id.value) {
+            alert("id를 입력해주세요 ");
+          } else if (!password.value || !passwordCheck.value) {
+            alert("password를 입력해주세요 ");
+          } else if (!checkInput.checked) {
+            alert("개인정보 이용동의를 체크해주셔야합니다!!");
+          }
+        }
+      });
+
+      passwordCheck.addEventListener("keyup", function (e) {
+        if (e.target.value === password.value) {
+          passwordStatus.textContent = "비밀번호가 일치합니다!";
+        } else {
+          passwordStatus.textContent = "비밀번호가 일치하지 않습니다";
+        }
+      });
+    </script>
+  </body>
+</html> -->

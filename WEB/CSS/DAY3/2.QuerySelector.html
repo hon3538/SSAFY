@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>My title</title>
+        <a href="mcdonald">Link text1</a>
+        <style>
+            .tt{
+                color: aqua;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>A heading</h1>
+        <a class="mac" href="www.mcdonald.co.kr">Link text0</a>
+
+        <script>
+            
+            //대신 QuerySelector를 사용한다.
+
+            //querySelector("선택자") class . id #
+            const h1Tag=document.querySelector("h1");
+            console.log(h1Tag);
+
+            const mac=document.querySelector(".mac");
+            console.log(mac);
+            console.log(mac.textContent);
+            mac.textContent="맥도 날드\n 삥뿡";
+            mac.href="https://www.naver.com";
+            mac.style="color:aqua;";
+            const arr=mac.textContent.split(" ");
+            for(let i=0;i<arr.length;i++){
+                console.log(arr[i]);
+            }
+           
+            // 특정 쿼리의 내용을 바꿀 수 있음
+            
+
+        </script>
+    </body>
+</html>

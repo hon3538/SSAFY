@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="test-wrapper">
+        <div>
+            <button></button>
+        </div>
+    </div>
+    <script>
+        // 첫번째 방식
+        const button=document.createElement('button');
+        // 생성은 했지만 DOM에 넣지 않은 상태
+        button.textContent="hello";
+        const body = document.querySelector('body');
+        body.append(button);
+        //append로 createElement로 생성한 item을 DOM에 추가해줌
+
+        //두번째 방식
+        // innerHTML
+        // 해당 query안에 있는 모든 HTML 요소를 바꿀수있다.
+
+        const data="<button>hello world</button>";
+        
+        const testWrapper = document.querySelector('.test-wrapper');
+        console.log(testWrapper.innerHTML);
+        // testWrapper.innerHTML=testWrapper.innerHTML+data+"gg";
+        // testWrapper.innerHTML=data;
+        // body.innerHTML=data;
+        // 이런식으로 모든 HTML 내용 지우거나 수정할 수 있어버림..
+
+        //innerHTML -> 보안에 썩 좋지는 않다.
+        //따라서 insertAdjacentHTML('위치','텍스트') 사용권장한다.
+        testWrapper.insertAdjacentHTML('beforeend',data);
+
+    </script>
+</body>
+</html>

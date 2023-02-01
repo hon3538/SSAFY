@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            height:1200px;
+        }
+        div{
+            border:1px solid black;
+        }
+        .test1{
+            position:fixed;
+            /* 3차원 요소로 동작(하늘에 떠있는 것처럼)
+                width를 따로 지정하지 않으면 inline처럼 블럭 크기가 줄어든다
+                따라서 width를 지정해줘야한다. */
+            width:100%;
+            bottom:10px; 
+            /* position에서 bottom:10px은 밑에 10px 간격으로 붙여논다는 의미이며
+                right left top도 같은 방식으로 적용 가능 */
+        }
+        .test2{
+
+        }
+    </style>
+</head>
+<body>
+    <!-- display(inline, block, inline-block, flex etc.)이
+        2차원이라면 Position은 3차원이라 생각하면 됨 -->
+    <!-- 창 위에 알림창이 뜨는 등 겹치는 요소 등-->
+    <div id="container">
+        <div class="test1">test1</div>
+        <div class="test2">test2</div>
+    </div>
+</body>
+</html>

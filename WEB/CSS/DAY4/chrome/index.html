@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <!-- 시멘틱태그 활용 -->
+    <!-- header, nav, main, section 보여지는건 div랑 똑같다 -->
+    <!--근데 검색 순위에서 유리하다-->
+     <!--header  -->
+    <header>
+        <!-- nav는 상단에 있는 메뉴바 만들 때 주로이용 -->
+        <nav class="header-nav">
+            <!-- ul.header-nav-list-wrapper>li*3 -->
+            <ul class="header-nav-list-wrapper">
+                <li>Gmail</li>
+                <li>이미지</li>
+                <li>
+                    <button class="toggle-button">
+                        다크 모드
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- main -->
+    <main class="main-container">
+
+        <!-- 로고파트 -->
+        <!-- alt는 시각장애인을 위한 이미지의 이름을 기입해주는것임 -->
+        <h1>
+            <img class="image-logo" src="./chrome Icons/logo.png" alt="구글 로고">
+        </h1>
+        <!-- 검색파트 -->
+        <div class="search-container">
+            <input id="search-input" placeholder="Google 검색 또는 URL 입력">
+            <img class="search-icon" src="./chrome Icons/search.png">
+        </div>
+        <!-- 아이콘파트 -->
+        <!-- section.bookmark-section -->
+        <section class="bookmark-section">
+            <div class="bookmark-wrapper">
+                <a href="" class="bookmark-item">
+                    <div class="img-icon-wrapper">
+                        <img src="./chrome Icons/naver.png">
+                    </div>
+                    <div class="bookmark-text">naver</div>
+                </a><a href="" class="bookmark-item">
+                    <div class="img-icon-wrapper">
+                        <img src="./chrome Icons/naver.png">
+                    </div>
+                    <div class="bookmark-text">naver</div>
+                </a><a href="" class="bookmark-item">
+                    <div class="img-icon-wrapper">
+                        <img src="./chrome Icons/naver.png">
+                    </div>
+                    <div class="bookmark-text">naver</div>
+                </a>
+                <a href="" class="bookmark-item">
+                    <div class="img-icon-wrapper">
+                        <img src="./chrome Icons/naver.png">
+                    </div>
+                    <div class="bookmark-text">naver</div>
+                </a>
+                <a href="" class="bookmark-item">
+                    <div class="img-icon-wrapper">
+                        <img src="./chrome Icons/naver.png">
+                    </div>
+                    <div class="bookmark-text">naver</div>
+                </a><a href="" class="bookmark-item">
+                    <div class="img-icon-wrapper">
+                        <img src="./chrome Icons/naver.png">
+                    </div>
+                    <div class="bookmark-text">naver</div>
+                </a><a href="" class="bookmark-item">
+                    <div class="img-icon-wrapper">
+                        <img src="./chrome Icons/naver.png">
+                    </div>
+                    <div class="bookmark-text">naver</div>
+                </a>
+            </div>
+        </section>
+    </main>
+    <script src="./index.js"></script>
+</body>
+</html>

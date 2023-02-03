@@ -2,18 +2,18 @@
 #include <vector>
 
 using namespace std;
-// 1ë²ˆ íŒ¨í„´ - í›„ìœ„ íƒìƒ‰
-// Aì˜ ì™¼ìª½ì— ì—°ê²°ëœ ìž¥ì‹ë“¤ì´ ì¼œì§‘ë‹ˆë‹¤.
-// Aê°€ ì¼œì§‘ë‹ˆë‹¤.
-// Aì˜ ì˜¤ë¥¸ìª½ì— ì—°ê²°ëœ ìž¥ì‹ë“¤ì´ ì¼œì§‘ë‹ˆë‹¤.
-// 2ë²ˆ íŒ¨í„´ - ì „ìœ„ íƒìƒ‰
-// Aê°€ ì¼œì§‘ë‹ˆë‹¤.
-// Aì˜ ì™¼ìª½ì— ì—°ê²°ëœ ìž¥ì‹ë“¤ì´ ì¼œì§‘ë‹ˆë‹¤.
-// Aì˜ ì˜¤ë¥¸ìª½ì— ì—°ê²°ëœ ìž¥ì‹ë“¤ì´ ì¼œì§‘ë‹ˆë‹¤.
-// 3ë²ˆ íŒ¨í„´ - í›„ìœ„ íƒìƒ‰
-// Aì˜ ì™¼ìª½ì— ì—°ê²°ëœ ìž¥ì‹ë“¤ì´ ì¼œì§‘ë‹ˆë‹¤.
-// Aì˜ ì˜¤ë¥¸ìª½ì— ì—°ê²°ëœ ìž¥ì‹ë“¤ì´ ì¼œì§‘ë‹ˆë‹¤.
-// Aê°€ ì¼œì§‘ë‹ˆë‹¤. 
+// 1¹ø ÆÐÅÏ - ÈÄÀ§ Å½»ö
+// AÀÇ ¿ÞÂÊ¿¡ ¿¬°áµÈ Àå½ÄµéÀÌ ÄÑÁý´Ï´Ù.
+// A°¡ ÄÑÁý´Ï´Ù.
+// AÀÇ ¿À¸¥ÂÊ¿¡ ¿¬°áµÈ Àå½ÄµéÀÌ ÄÑÁý´Ï´Ù.
+// 2¹ø ÆÐÅÏ - ÀüÀ§ Å½»ö
+// A°¡ ÄÑÁý´Ï´Ù.
+// AÀÇ ¿ÞÂÊ¿¡ ¿¬°áµÈ Àå½ÄµéÀÌ ÄÑÁý´Ï´Ù.
+// AÀÇ ¿À¸¥ÂÊ¿¡ ¿¬°áµÈ Àå½ÄµéÀÌ ÄÑÁý´Ï´Ù.
+// 3¹ø ÆÐÅÏ - ÈÄÀ§ Å½»ö
+// AÀÇ ¿ÞÂÊ¿¡ ¿¬°áµÈ Àå½ÄµéÀÌ ÄÑÁý´Ï´Ù.
+// AÀÇ ¿À¸¥ÂÊ¿¡ ¿¬°áµÈ Àå½ÄµéÀÌ ÄÑÁý´Ï´Ù.
+// A°¡ ÄÑÁý´Ï´Ù. 
 
 vector<int>map[1001];
 vector<int>rule[3];
@@ -25,18 +25,18 @@ void dfs(int now){
     visited[now]=1;
     int next;
     
-    rule[1].push_back(now); //ì™¼ -> ì˜¤, ì „ìœ„íƒìƒ‰
-    //ì™¼ìª½
+    rule[1].push_back(now); //¿Þ -> ¿À, ÀüÀ§Å½»ö
+    //¿ÞÂÊ
     next=map[now][0];
     dfs(next);
 
-    rule[0].push_back(now); // ì™¼ -> ì¤‘ì•™ -> ì˜¤, í›„ìœ„íƒìƒ‰
+    rule[0].push_back(now); // ¿Þ -> Áß¾Ó -> ¿À, ÈÄÀ§Å½»ö
 
-    //ì˜¤ë¥¸ìª½ 
+    //¿À¸¥ÂÊ 
     next=map[now][1];
     dfs(next);
 
-    rule[2].push_back(now); // ì™¼ -> ì˜¤ -> ì¤‘ì•™, í›„ìœ„íƒìƒ‰
+    rule[2].push_back(now); // ¿Þ -> ¿À -> Áß¾Ó, ÈÄÀ§Å½»ö
 }
 int main(){
     int n;

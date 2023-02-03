@@ -32,7 +32,7 @@ int main(){
             visited[next]=visited[now]+1;
             if(visited[next]-1<=2){
                 cnt++;
-            }else break;
+            }else continue;
             q.push(next);
         }
     }

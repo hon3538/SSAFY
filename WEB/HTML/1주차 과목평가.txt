@@ -1,0 +1,92 @@
+1. HTML이란?
+: HyperText Mark-up Language, 웹사이트의 모습을 기술하기 위한 마크업 언어.
+프로그래밍 언어가 아니라 문서의 내용 이외의 구조나 서식 등을 표현한다.
+
+2. img 
+<img src="이미지 경로" alt="">
+alt는 이미지를 보여줄 수 없을 때 대신 띄우는 text
+
+3. p (paragraph의 약자)
+: 하나의 문단을 만들 때 사용함
+
+4. 절대경로
+: 처음부터 시작하여 목적지까지의 절대적인 경로
+
+5. 상대경로
+: 현재위치를 기준으로 목적지까지의 경로
+
+6. input type 종류
+: text, password, date, checkbox, radio, submit, button
+
+7. 시멘틱태그
+: 시멘틱태그 -> 의미론적 웹, SEO 상승
+*SEO(Search Engine Optimization) : 검색 엔진이 태그의 목적에 부합하게 설계
+되어있는 구조의 사이트에서 더욱 빨리 효율적으로 정보를 파악할 수 있어
+검색 결과의 노출에 유리할 수 있게 해준다.
+
+8. UI UX
+: 유저가 보는 화면과 유저 경험
+CSS 적용법 3가지
+CSS 선택자 종류
+
+9. 가운데정렬 (텍스트, element 포함)
+: text-align:center
+
+10. border-radius로 원만들기
+: border-radius:50%;
+
+11. display: block vs inline
+: block -> div, p, h1 etc.
+: inline -> span, a, em etc.
+
+*a : <a href=""> -> 하이퍼링크 태그
+12. flex
+: 레이아웃 배치 전용기능
+
+13. position
+: relative -> 원래 있어야할 위치를 기준으로 배치를 자유롭게 할 수 있다.
+: absolute -> 상위 position 요소나 최상위 요소를 기준으로 배치.
+
+14. z-index
+: 평면이 아닌 수직 속성으로 높을수록 우선순위로 보여줌(default=0)
+
+Java는 JavaScript와 아무 관련없음
+
+15. Node.js는 JS의 런타임이다. 즉, JS 로 만든 발명품
+: JS라는 프론트엔드 필수 언어로 백엔드까지 작성할 수 있다는 장점.
+
+JavaScript 타입
+
+16. var vs let vs const
+: var -> 함수 레벨 스코프, 변수 중복 선언 가능
+: let -> 블록 레벨 스코프, 변수 중복 선언 불가능
+: const -> 블록 레벨 스코프, 변수 재할당까지 불가능
+const로 선언된 배열과 객체의 값 변경 가능?
+null vs undefined
+
+object: 각각의 값에 접근하는 법 연습
+dom 가져오려면 Document
+qeurySelector, querySelector All
+-> const buttons = document.querySelectorAll('.button');
+for(let i=0;i<buttons.length;i++){
+    buttons[i].addEventListener('click',function(){});
+}
+addEventListener
+
+textContent
+createElement
+-> const button =document.createElement('button');
+button.textContent="hello";
+const test = document.querySelector('.container");
+test.append(button);
+
+classList
+console.log(button.getAttribute("textContent"));
+button.setAttribute("textContent","HI~");
+button.classList.add('추가할클래스');
+bootstrap 사용시 장점
+cdn(content delivery network) : 가까운 지점 서버에 캐시 저장
+
+min.js -> 가독성을 포기하고 용량을 줄인 파일로 전송량을 줄일 수 있다.
+css파일은 가독성을 위해 개발할 때 사용하고 이를 압축하여 min.css 파일을 만들어
+실제 서비스에 사용된다.

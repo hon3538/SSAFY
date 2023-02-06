@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			body {
+				min-height: 100vh;
+			}
+			.el:hover {
+				opacity: 0.9;
+				cursor: pointer;
+			}
+
+			.el:active {
+				opacity: 0.7;
+			}
+
+			span {
+				font-weight: bold;
+			}
+
+			.box {
+				position: relative;
+				width: 800px;
+				height: 800px;
+				/* background-color: aliceblue; */
+				/* border: 1px solid black; */
+				margin: 50px auto;
+				box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+					rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+					rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<input id="normal" /><button id="button">생성하기</button>
+		<br />
+		<input id="special" /><button id="special-button">
+			스페셜 버튼 생성하기
+		</button>
+		<div>점수: <span></span></div>
+
+		<div class="box"></div>
+		<script src="./30. 랜덤으로 퍼지는.js"></script>
+	</body>
+</html>

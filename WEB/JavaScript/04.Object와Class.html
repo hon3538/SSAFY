@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //자바스크립트는 객체지향언어가 아니라 멀티패러다임언어(힘수,객체)로
+        //class 기반이 아니다. 
+
+        //JSON과 비슷하다. Javascript Object Notion
+        //또한 struct 개념과도 유사하다.
+        const a={};
+
+        const b={
+            //프로퍼티
+            team: "hello",
+            teamCount: 7,
+            member: ["inho", "온유", 1999],
+            other: {
+                average: 20,
+            },
+
+            //메서드
+            run : function(){
+                alert("Hi");
+            }
+        }
+
+        //리터럴 방식
+        const ssafy={
+            name:"임베디드",
+            study:function(){
+                console.log("study");
+            }
+        }
+
+        //생성자 함수
+        const ssafy2 = new Object();
+        ssafy2.name="imbedded",
+        ssafy2.study = function(){
+            console.log("studying");
+        }
+        //b.team == b['team']
+
+        //JSON 은 JAVA, Python, JavaScript 에서 모두 다 씀
+        //예로 java에서 data를 python으로 변환해야할 때
+        //JSON 형식으로 변환해서 전달하고 또 전달 받으면
+        //다른 언어사이의 data 전송이 자유롭다. 즉, 데이터 전송 규칙이다.
+    </script>
+</body>
+</html>

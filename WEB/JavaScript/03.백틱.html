@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //백틱 `` 한번에 문자열 혼합 가능
+
+        const myName ="홍의선";
+
+        //문자열 자바스크립트 혼합 ok
+        const introduce = "제 이름은" + myName +"입니다.";
+
+        //${}
+        const introduce2=`제 이름은  ${myName} 입니다`;
+
+        //오류 발생
+        const hello="안녕하세요" +
+                    "저는"
+                    +"치킨입니다.";
+
+        //백틱은 enter를 허용한다.
+        const hello2=`안녕하세요
+            저는
+            치킨입니다
+            `;
+
+        //insertAdjacentHTML 문자열로 된 html 태그를 집어넣기
+        const a = `
+            <div class="a">
+            안녕하세요
+            </div>
+            `
+            const bb = (hello)=>`
+            <div class="a">
+                ${hello}
+            </div>
+            `
+
+        document.qeurySelector('body').insertAdjacentHTML('beforend',a);
+    </script>
+</body>
+</html>

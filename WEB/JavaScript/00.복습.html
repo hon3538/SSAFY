@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" id="btn" value="안녕">
+
+    
+    <script>
+        const btn =document.querySelector('#btn');
+        const hi=document.createElement('button');
+        hi.textContent="안녕";
+        const hello=document.createElement('div');
+        hello.textContent="안녕";
+        // 무한 버튼 생성
+        btn.addEventListener('click',function(){
+            document.querySelector('body').append(hello);
+        })
+        const a = "HelloworldHELLO";
+
+const g1 = a.indexOf("HELLO");
+console.log(g1);
+    </script>
+</body>
+</html>

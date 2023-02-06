@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        class Element{
+            //배경색, width, hegiht를 받아서
+            //Element를 생성하자마자 DOM에 들어가기
+            constructor(backgroundColor,width,height){
+                this.backgroundColor=backgroundColor;
+                this.width=width;
+                this.height=height;
+
+                this.element=null;
+                //DOM에 넣기위한 작업
+                this.init();
+            }
+
+            init(){
+                const div=document.createElement('div');
+                div.style.backgroundColor=this.backgroundColor;
+                div.style.width=this.width;
+                div.style.height=this.height;
+                //DOM
+                document.querySelector('body').append(div);
+                this.element=div;
+                this.clickEvent();
+            }
+            //width의 길이를 500px로 변화시키는 이벤트
+            // clickEvent(){
+            //     //접근할 방법
+            //     this.element.addEventListener('click',function(){
+            //         console.log("클릭!!");
+            //         console.log(this);
+            //         console.log(this.element);
+            //     })
+            // }
+            // clickEvent(){
+            //     //접근할 방법
+            //     console.log(this); // 해당 this 는 객체 자체를 가리킨다.
+            //     this.element.addEventListener('click',function(){
+            //         console.log("클릭!!");
+            //         console.log(this); // 해당 this는 해당 event객체를 가리킨다.
+            //         console.log(this.element);
+            //     })
+            // }
+            // clickEvent(){ //해결법 1
+            //     const This=this;
+            //     this.element.addEventListener('click',function(){
+            //         console.log("클릭!!");
+            //         console.log(This); 
+            //         console.log(This.element);
+            //         This.element.style.width="500px";
+            //     })
+            // }
+            clickEvent(){ //해결법 2
+                //화살표 함수에서의 this는 상위를 찾아간다.
+                this.element.addEventListener('click',()=>{
+                    console.log("클릭!!");
+                    console.log(this); 
+                    this.element.style.width="500px";
+                })
+            }
+        }
+        const red =new Element('red','200px','200px');
+        const blue =new Element('blue','200px','200px');
+    </script>
+</body>
+</html>

@@ -61,32 +61,6 @@ void restoreMap(int y, int x, int dy, int dx) {
         lineCnt--;
     }
 }
-/*void dfs(int level) { // level은 배열에 저장한 core 수
-    if (level == v.size()) {
-        if (completed > maxCore) {
-            maxCore = completed;
-            minLine = INT_MAX;
-        }
-        else if (completed == maxCore && minLine > lineCnt) {
-            minLine = lineCnt;
-        }
-    }
-
-    //branch는 direction
-    for (int i = 0; i < 4; i++) {
-        int y = v[level].y;
-        int x = v[level].x;
-
-        if (!isPossible(y, x, dir[i][0], dir[i][1]))
-            continue;
-        changeMap(y, x, dir[i][0], dir[i][1]);
-        completed++;
-        dfs(level + 1);
-        completed--;
-        restoreMap(y, x, dir[i][0], dir[i][1]);
-    }
-    dfs(level + 1); // 아무 전선도 연결하지 않을 경우
-}*/
 void dfs(int level) { // level은 배열에 저장한 core 수
     if (level == v.size()) {
         if (completed > maxCore) {
@@ -152,10 +126,10 @@ int main() {
         cout << '#' << t << ' ' << ans[t-1] << '\n';
     }
 }
+
 //입력
-//,0 : road, 01 : core , -1 : visited
+//0 : road, 1 : core , -1 : visited
 //dfs 
-//1. 바로 연결된것들은 제외
 //level -> core 개수
 //branch -> direction
 //backtracking point

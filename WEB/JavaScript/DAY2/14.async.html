@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        //from JSONPlaceholder site
+        const result=axios.get("https://jsonplaceholder.typicode.com/todos/")
+        result.then(data=>console.log(data));
+        //외부로부터 데이터를 받아서 배열 or 객체 형태 
+        //HTML과 일치화(data와 화면의 일치화)
+    </script>
+</body>
+</html>

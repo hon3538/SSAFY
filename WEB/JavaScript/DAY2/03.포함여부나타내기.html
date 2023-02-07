@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main{
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+        }
+        button{
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="main">
+        <span> 배열</span>
+        <input class="arr" type="text">
+        <span>포합 되었는지 확인할 값</span>
+        <input class="target" type="text">
+        <button>결과</button>
+        
+    </div>
+
+    <script>
+        const btn =document.querySelector('button');
+        const input=document.querySelector('.arr');
+        const tar= document.querySelector('.target');
+        const main=document.querySelector('.main');
+        
+        
+        const result=document.createElement('span');
+        main.append(result);
+        btn.addEventListener('click',()=>{
+            const st=input.value;
+            const arr=st.split(',');
+            const target=String(tar.value);
+            
+            if(arr.some(t=>t===target)){
+                result.textContent="포함";
+            }else   result.textContent="미포함";
+
+            //main.append(result);
+        })
+        
+    </script>
+
+    <!-- <div class="container">
+        배열 <input id="array-input">
+        포함되었는지 확인할 값: <input id="value-input">
+        <button class="result-button">결과</button>
+    </div>
+
+    <script>
+        const arrayInput=document.querySelector("#array-input");
+        const valueInput =document.querySelector("#value-input");
+        const resultButton=document.querySelector('.result-button');
+        const res = document.querySelector('.result');
+
+        resultButton.addEventListener('click',()=>{
+            const array=arrayInput.valueInput.split(',');
+            const isImported = array.some(element=> element===valueInput.value);
+            if(isImported===true){
+                result.textContent="포함";
+            }else   result.textContent="미포함";
+
+        })
+
+    </script> -->
+</body>
+</html>

@@ -26,8 +26,10 @@ let bucketList =[
 
 //practicing1
 // ex) name : "euiseon"
-// . has excess to only key, name
-// [] has excess to variable, "euiseon"
+
+// . has excess to only key, name -> cur.name ==="euison"
+// [] has excess to variable, "euiseon" -> cur['name']==="euiseon"
+
 // function getValues(key){
 //     const result=bucketList.reduce((acc,cur)=>{
 

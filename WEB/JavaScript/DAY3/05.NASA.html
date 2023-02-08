@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        /* body::after {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            min-height: 100vh;
+            background-color: rgb(40, 40, 40);
+            opacity: 0.8;
+            content: "";
+            display: block;
+        } */
+
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            margin: 70px auto;
+        }
+
+        .box {
+            border-radius: 46px;
+            width: 60%;
+            height: 80%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9;
+
+            /* background-image: url("https://apod.nasa.gov/apod/image/2103/M64_Hubble_960.jpg"); */
+            background-size: cover;
+            /* 지연 속도 이벤트 */
+            transition: all 0.5s ease-out;
+
+        }
+
+        .box:hover {
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            /* opacity: 0.8; */
+            cursor: pointer;
+        }
+
+        .title {
+            color: white;
+            font-size: 30px;
+            text-align: center;
+            margin-top: 30px;
+            opacity: 0.7;
+        }
+
+        .hidden {
+            /* 회전 */
+            transform: rotate(30deg);
+            opacity: 0.9;
+            /* 안보이게 하는 처리 */
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- data와 HTML 일치화 -->
+        <!-- HTML 태그를 데이터 없이 만들어보고 -->
+        <!-- 그 후에 반복이 될 부분들을 함수로 묶는다 -->
+        <!-- 반복파트 -->
+        <div class="box" style="background-image:url('https://apod.nasa.gov/apod/image/quintet_keel_big.gif')">
+            <div class="title">
+                목성을 표현한 사진입니다.
+            </div>
+        </div>
+        <!-- 반복파트 -->
+
+    </div>
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function imageComponent(url, title) {
+            //바뀔부분 확인
+            //background url
+            //title
+            return `
+            <div class="box" style="background-image:url('${url}')">
+            <div class="title">
+                ${title}
+                </div>
+            </div>
+            `
+        }
+
+        const api_key = "iXfCvfTQj4qeOysdX6i3xihdx89cwj7vxxreKMOi";
+        const url = `https://api.nasa.gov/planetary/apod?api_key=${api_key}&count=10`
+
+        async function getNasa() {
+            const result = await axios.get(url);
+            console.log(result);
+            //첫번째 배열의 이미지를 전체 배경화면으로 정하기
+            //result.data[0].hdurl
+            //body에 해당 url 적용
+            document.querySelector('body').style.backgroundImage = `url(${result.data[0].url})`
+            //이미지 mapping 작업
+            const component = result.data.reduce((acc, cur) => {
+                acc = acc + imageComponent(cur.url, cur.title);
+
+                return acc;
+            }, "")
+            console.log(component);
+            //container에 tag 넣기
+            document.querySelector('.container').insertAdjacentHTML('beforeend', component);
+
+            //hidden 이벤트 부여
+            const allBox = document.querySelectorAll('.box');
+            allBox.forEach(i => i.addEventListener('click', (e) => {
+                //클릭할 때마다 현재 선택된 이벤트 객체의 class에 hidden 을 추가
+                e.target.classList.add('hidden');
+            }))
+        }
+        
+        getNasa(); // Network tab = Fetch/XHR 에서 값 들어왔는지 확인
+    </script>
+</body>
+
+</html>

@@ -28,7 +28,6 @@ function sleep(delay) {
     const start = Date.now();
     const limit = start + delay;
     while (Date.now() < limit) { }
-
 }
 console.log("빨래");
 sleep(3000);

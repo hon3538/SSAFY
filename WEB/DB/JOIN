@@ -1,0 +1,17 @@
+SELECT 열 목록 from 1번테이블 조인종류 2번테이블 ON 조인될조건 Where 검색조건
+
+-- departments에도 dept_no가 있고
+-- dept_emp dept_no가 있다
+-- 명시를 해줘야한다
+-- 중복이 아니라면 그냥 작성해도 ok
+SELECT * FROM employees.dept_emp;
+select emp_no, al.dept_no,dept_name from employees.dept_emp a1
+inner join departments a2
+on a1.dept_no =a2.dept_no;
+; a1, a2는 해당 table의 별명
+-- 각 사원들의 사원번호(중복), first_name(employees에만), salary(salaries에만)
+select first_name, salary from employees a
+
+inner join salaries b
+on a.emp_no =b.emp_no
+where to_date = '9999-01-01'; 

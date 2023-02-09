@@ -1,0 +1,30 @@
+-- schema name 생략가능
+use minco;
+-- C
+-- INSERT INTO 테이블 values(값1, 값2, 값3...)
+insert into minco.crud values(6,'이순신',20);
+select * from minco.crud;
+
+-- INSERT INTO 테이블 (컬럼1, 컬럼2) values(값1,값2)
+insert into minco.crud
+(name,age)
+values('박중박',50);
+select * from minco.crud;
+-- U
+-- Update 테이블 SET 필드 = 값 where 조건
+-- 이순신의 나이를 320세로 바꾸기
+-- update minco.honey set age=320 where name="이순신";
+-- 이순신은 기본키(PK)가 아니기 때문에 이순신의 이름은 어디든지 있을 수 있다.
+-- 수십만개의 이순신의 age를 320으로 전부 바뀌면 이슈가 되기 때문에 workbench에서 막아놨다. -> 풀 순 있음
+-- 이름을 기본키로 설정하던가 아니면 이미 기본키로 설정된 필드값으로 변경하면 된다.
+Update minco.crud set age=320 where name="이순신";
+update minco.crud set name ='박비비' where name="박중박";
+
+-- D
+delete from minco.crud where num=6;
+
+-- 도전
+update minco.crud set age=15 where num=2 or num=4;
+select * from minco.crud;
+delete from minco.crud where num=1;
+insert into minco.crud values(50,'촉촉',100);

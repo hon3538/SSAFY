@@ -1,0 +1,12 @@
+use minco;
+select * from honey;
+
+-- NULL 일경우 대체값 표시, ( 필드(컬럼), 대체값)
+select num, IFNULL(name,"아무개"), age from honey;
+
+-- 중복제거 컬럼 앞에 distinct
+select distinct dept_no from employees.dept_emp;
+
+-- 문자열 합칠 경우
+-- concat('합칠 문자열', '...', '.....',..)
+select concat('aaa','bbbb','ccccccc');

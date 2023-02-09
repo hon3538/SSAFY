@@ -1,0 +1,36 @@
+-- SELECT 필드명 FROM TABLE
+SELECT * FROM minco.honey;
+SELECT name, age FROM minco.honey;
+
+-- 조건 SELECT 필드명 FROM TABLE WHERE
+select * from minco.honey where num >=2 and num <=4;
+select * from minco.honey where num >=2 or num<1;
+-- === 혹은 == 이 아니라 =
+-- age가 30인 record를 가져온다.
+select * from minco.honey where age =30;
+select 123 + 45;
+-- 문자열 사칙연산 문자열을 0으로 인식
+select 'SSAFY' + 123;
+
+select * from minco.honey where num=3 or num=5;
+select name, age from minco.honey where num>=2 and num<=5;
+select * from minco.honey where age>=20 and age<30;
+select name from minco.honey where num%2=0 and age%2=1;
+
+-- 필드 이름 바꾸기 2가지 방법
+select name from minco.honey;
+select name as '이름' from minco.honey;
+select name '이름' from minco.honey;
+
+-- 정렬하기 SELECT * FROM TABLE ORDER BY 필드명
+-- 기본값 오름차순
+-- 오름차순 ASC 대림차순 Desc
+
+select * from minco.honey order by age;
+select * from minco.honey order by age desc;
+
+-- LIMIT 개수 제한
+-- 예를들어) 페이지 나타낼때 10개를 제한해서 1~10, 11~20 까지 등
+-- LIMIT 건너뛸 개수, 가져올 개수
+select * from minco.honey Limit 3;
+select * from minco.honey Limit 2, 3;

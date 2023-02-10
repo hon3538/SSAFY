@@ -1,0 +1,43 @@
+-- BETWEEN (구간 사이 데이터 추출)
+-- and 조건이랑 같은데 구간 사이에 대해
+select * from honey;
+select * from honey where num between 3 and 4;
+
+-- IN
+-- in안에 작성한 내용중에 해당되는 레코드를 가져온다.
+select * from honey where name in('계란','민철','뿌미');
+
+-- LIKE
+-- where 다음에 사용
+-- % 다중문자를 의미
+-- _ 한글자를 의미
+select * from honey where Name LIKE '뿌%';
+select * from honey where Name LIKE '_미';
+
+-- 대소문자 구분시 BINARY
+select * from crudcrudcity where name Like Binary '%New%';
+
+-- 그룹함수
+-- 집계용 SUM AVG MIN MAX COUNT
+
+-- GROUP BY, 각 도시별~ 뭐를 가져와라~, 지역별 ~ 통계alter
+-- 그룹함수와 함께 사용
+-- 원하는 그룹으로 나눠서 가져오는데
+
+-- CountryCode 별 총 인구수 alter
+select CountryCode, sum(Population) from city group by CountryCode;
+
+-- group by 상태에서 조건 having
+-- where 는 group by를 사용하기전 조건
+-- having은 group by를 하고나서 조건
+
+-- 국가별로 인구수를 묶되, 인구수를 100만이 넘는 경우에만 출력
+select CountryCode, sum(Population) from city group by CountryCode having sum(Population)>10000000;
+
+-- world 스키마의 레코드 총 개수 출력
+select count(*) "레코드 수" from city;
+-- 하위 5개의 도시 코드, 인구수 출력
+select CountryCode, sum(Population) from city group by CountryCode order by sum(Population) desc limit 5;
+-- Top 5개의 국가 코드, 인구수 출력
+select CountryCode, sum(Population) from city group by CountryCode order by sum(Population) limit 5;
+select CountryCode, max(Population) from city group by CountryCode order by max(Population) desc limit 5;

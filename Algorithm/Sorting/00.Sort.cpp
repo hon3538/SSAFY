@@ -32,6 +32,15 @@ struct Student
     int n;
     int score;
 };
+
+// bool cmp(string left, string right)
+// {
+//     if (left.length() > right.length()) return false;
+//     if (left.length() < right.length()) return true;
+    
+//     return left<right; // 문자열 사전순 비교 바로 가능
+// }
+
 // bool cmp(int left, int right)
 // {
 //     return left > right;

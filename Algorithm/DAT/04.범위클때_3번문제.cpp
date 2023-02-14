@@ -2,7 +2,7 @@
 #include <queue>
 using namespace std;
 
-//Linkedlist(vector/qeueu) 로 받아주고 정렬을 하면
+//Linkedlist(vector/queue) 로 받아주고 정렬을 하면
 //큰 index범위를 DAT 사용하지 않고 풀 수 있음
 struct Node {
     int y, x;

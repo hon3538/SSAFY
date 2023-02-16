@@ -1,3 +1,5 @@
+//일단 중복 안 되는 모든 될 수 있는 간선들을 다 때려박고
+//가중치 작은 순서로 한번 sort 하고 진행
 #include <iostream>
 #include <queue>
 #include <vector>
@@ -11,6 +13,7 @@ struct Edge {
     }
 };
 priority_queue<Edge>pq;
+//****sort는 마지막에 한번만 하면 되므로 pq 보단 vector가 유리하다.
 vector<int>parent;
 int Find(int now) {
     if (now == parent[now])

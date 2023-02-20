@@ -4,6 +4,8 @@
 // #2 dist 준비
 // -> 모두 max로 초기화
 // -> 시작노드까지의 최단거리를 0으로 설정
+// -> dist는 시작노드에서 각 노드들의 최단 거리만을 저장하는 DAT 배열
+// -> 모든 노드 거리를 저장해놓고 필요한 노드의 거리를 dist에서 바로 뽑아쓸 수 있다.
 // #3 visited 준비
 
 // 구현 단계 
@@ -41,6 +43,7 @@ int main(){
     priority_queue<Edge>pq;
     pq.push({0,0});
     dist[0]=0;
+    
     while(!pq.empty()){
         Edge now=pq.top();
         pq.pop();
@@ -114,7 +117,7 @@ void dijkstra(int start) {
             if (dist[next.to] <= ncost)
                 continue; // 쓸모없는 경로 
             // next까지 가기 위한 새로운 최단 거리  찾음!~
-            dist[next.to] = ncost; 
+            dist[next.to] = ncost; ->..? dist를 왜 업뎃하지
             // 새로운 후보지로 등록 
             pq.push({ next.to, ncost });
         }

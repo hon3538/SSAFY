@@ -99,7 +99,7 @@ void dijkstra(int start) {
         //queue에 들어갔다고 해도 cost로 priority_queue 정렬을 해주므로
         //같은 노드로 오는, 나중에 나오는 edge 값은 곧 cost가 더 높은 것이므로
         //backtracking 해주면 visited 변수 없이도 visited 처리 할 수 있다.  
-        if (dist[now.to] < now.cost) 
+        if (dist[now.to] < now.cost)  // 같은 경우는 진행, 이전에 더 작은길잉 없었다는 뜻
             continue;
 
         //이해를 쉽게하기 위해서 dist[node] 는 해당 노드에 어떤 경로로
@@ -117,7 +117,7 @@ void dijkstra(int start) {
             if (dist[next.to] <= ncost)
                 continue; // 쓸모없는 경로 
             // next까지 가기 위한 새로운 최단 거리  찾음!~
-            dist[next.to] = ncost; ->..? dist를 왜 업뎃하지
+            dist[next.to] = ncost; -> 현재 dist보다 더 적은 길로 갈 수 있으면 q에 업뎃해줌 , 그리고 q에서 뺄때 확인
             // 새로운 후보지로 등록 
             pq.push({ next.to, ncost });
         }

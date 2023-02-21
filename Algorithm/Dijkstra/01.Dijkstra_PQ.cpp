@@ -101,7 +101,16 @@ void dijkstra(int start) {
         //backtracking 해주면 visited 변수 없이도 visited 처리 할 수 있다.  
         if (dist[now.to] < now.cost)  // 같은 경우는 진행, 이전에 더 작은길잉 없었다는 뜻
             continue;
+//이걸 안해주면 dist =짧은 경로 -> 나중에 -> dist =더 짧은 경로
+        // 일때 더짧은 경로를 먼저 들어오긴하지만 pq에는 그냥 짧은 경로도 들어가있기때문
+        그냥 여기서 dist를 업데이트를 해줄 수도 있지만
+        dist 말고 다른 조건등이 있을 때, 또 이전 node와 next node 사이
+        정보를 이용해야 할 때는 next를 받아오는 for문안에서 진행한다
+        따라서 for문 안에서 next도 가기전에 dist를 업뎃해준다.
 
+        여기도 하고 for문도 하면 어떻게 될까?
+        결론은 의미없다..어차피 dist는 업데이트 돼서 들어오기때문에
+        
         //이해를 쉽게하기 위해서 dist[node] 는 해당 노드에 어떤 경로로
         //몇 번의 경로를 거치든 상관없이 시작점에서 부터 가장 작은 cost값을
         //저장한다 다음에 갈 노드의 dist[node]가 더 작으면 q에 안 넣으므로..
@@ -119,6 +128,7 @@ void dijkstra(int start) {
             // next까지 가기 위한 새로운 최단 거리  찾음!~
             dist[next.to] = ncost; -> 현재 dist보다 더 적은 길로 갈 수 있으면 q에 업뎃해줌 , 그리고 q에서 뺄때 확인
             // 새로운 후보지로 등록 
+            //가능한 후보들을 다 넣어놓고 pq에서 나오는 순간 그노드는 확정임 
             pq.push({ next.to, ncost });
         }
     }

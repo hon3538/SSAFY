@@ -27,12 +27,14 @@ struct Edge {
 vector<Node>v;
 priority_queue<Edge>pq;
 int dir[4][2] = { -1,0,0,1,1,0,0,-1 };
-int getDit(int a) {
+int getDit(Node start) {
+ //node 이름은 1부터 시작, v[node-1] vector index는 0부터 시작.
     queue<Node>q;
-    q.push({ v[a].y,v[a].x });
+
+    q.push(start);
     int dit = -1;
     memset(visited, 0, sizeof(visited));
-    visited[v[a].y][v[a].x] = 1;
+    visited[start.y][start.x] = 1;
 
     while (!q.empty()) {
         Node now = q.front();
@@ -43,11 +45,10 @@ int getDit(int a) {
             int dx = now.x + dir[i][1];
             if (dy < 0 || dx < 0 || dy >= Y || dx >= X)
                 continue;
-            if (map[dy][dx] == '#' || visited[dy][dx] >= 1)
+            if (map[dy][dx] == -1 || visited[dy][dx] >= 1)
                 continue;
-            if (map[dy][dx] != '_' && map[dy][dx] > a) {
-                pq.push({ a,map[dy][dx],visited[now.y][now.x] });
-            
+            if (map[dy][dx] != 0) {
+                pq.push({ map[start.y][start.x],map[dy][dx],visited[now.y][now.x]});
             }
             visited[dy][dx] = visited[now.y][now.x] + 1;
             q.push({ dy,dx });
@@ -71,7 +72,7 @@ void Union(int A, int B) {
 int kruskal() {
     int sum = 0;
     int cnt = 0;
-    
+
     while (!pq.empty()) {
         Edge now = pq.top();
         pq.pop();
@@ -79,7 +80,7 @@ int kruskal() {
         if (Find(now.a) == Find(now.b))
             continue;
         sum += now.cost;
-   
+
         cnt++;
         Union(now.a, now.b);
     }
@@ -88,7 +89,16 @@ int kruskal() {
     }
     else return -1;
 }
-
+void print() {
+    for (int y = 0; y < Y; y++) {
+        for (int x = 0; x < X; x++) {
+            if (map[y][x] >= 0)
+                cout << ' ';
+            cout << map[y][x];
+        }
+        cout << '\n';
+    }
+}
 int main() {
     int T;
     cin >> T;
@@ -96,21 +106,31 @@ int main() {
         cin >> X >> Y;
         Size = 0;
         v.clear();
+        v.push_back({ -1,-1 }); //node 0번은 없으므로 예외처리
         for (int y = 0; y < Y; y++) {
             string s;
             cin >> s;
             for (int x = 0; x < X; x++) {
-                map[y][x] = s[x];
-                if (map[y][x] != '_' && map[y][x] != '#') {
-                    map[y][x] = Size;
+                if (s[x] == '#') {
+                    map[y][x] = -1;
+                }
+                else if (s[x] == '_') {
+                    map[y][x] = 0;
+                }
+                else {
                     Size++;
                     v.push_back({ y,x });
+                    map[y][x] = Size;
                 }
             }
         }
-        for (int i = 0; i < Size; i++) {
+       // print();
+        for (int i = 1; i <= Size; i++) {
             parent[i] = i;
-            getDit(i);
+            getDit(v[i]);
+            //cout << pq.size() << '\n';
+            map[v[i].y][v[i].x] = -1; //이미 연결한 노드는 벽으로 만들어줌
+            //print();
         }
         cout << kruskal() << '\n';
     }

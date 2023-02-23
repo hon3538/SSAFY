@@ -51,7 +51,7 @@ void dfs(int now)
         sort(stair[1].begin(), stair[1].end(), cmp2);
         // stair1 선택한 사람부터
         int Max = 0; //현재조합에서 가장 Max;
-        for (int s = 0; s < 2; s++)
+        for (int s = 0; s < 2; s++) //계단 선택
         {
             int dit; //계단까지 거리
             int len = stairs[s].length;

@@ -3,6 +3,8 @@
 #include <cstring>
 #include <algorithm>
 using namespace std;
+//*********Sliding window로 풀면 훨 빠름....
+
 // 숫자 string이 주어짐 -> length /4  -> 각변에 위치한 16진수 개수
 // 왼쪽부터 높은자리이다.
 // string length /4 가 각 변의 16진수 개수이다. 즉 length/4 -1 번 돌려서

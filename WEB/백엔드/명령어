@@ -1,0 +1,87 @@
+--help - 도움말 (ls --help)
+
+ls - 디렉토리 조회
+(- a:숨김파일까지, r: reverse, t: time순 정렬, l: 보기좋게 list up)
+pwd - 현재 디렉토리 경로 확인
+
+clear - 화면 지우기
+
+cd - 디렉토리 이동
+
+#파일관리
+
+touch - 파일 생성
+
+rm - 파일 삭제
+rm -r 디렉토리 내부 파일까지 삭제 
+(내부 디렉토리도 다 삭제, rmdir은 내부에 파일있으면 에러발생)
+
+mkdir - 디렉토리 생성
+mkdir - 디렉토리 명
+
+mv 파일 이동하기 및 이름 변경하기
+
+cp 파일 복사하기
+cp 파일 경로
+cp -r 디렉토리이름 만들디렉토리이름 -> 디렉토리 복사
+
+nano - 리눅스용 명령 텍스트 에디터(일반 텍스트 에디터와 유사하게 사용 가능)
+ctrl+x -> text editor 에서 나가기
+
+vi/vim - 임베디드 개발자가 가장 많이 사용하는 에디터(단축키에 익숙해져야 하므로 난이도가 있음)
+
+#다운로드
+sudo apt update - 뭔가를 다운받기 전에 목록들을 업데이트
+(*apt : advanced packaging tool)
+sudo apt install 다운로드 받을 것
+
+sudo etc/nginx/sites-available/
+sudo nano default 
+를 치면 아래 내용이 나옴
+
+ root /var/www/html;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+        }
+
+root 가 /var/www/html 라는 것이고
+location은 ip주소, 위치 이다
+http://3.34.52.70/ 여기서 마지막 '/' 는 생략되어있는데
+location /  여기에서 '/'를 추가해 줌으로써 생략이 가능한것이다.
+의미는 location / 여기 위치에 오면 root에 있는 파일을 실행한다
+
+즉, /var/www/html/ 에 있는 index.nginx-debian.html를 웹 서버에 띄운다
+ubuntu@ip-172-31-33-141:/var/www/html$ sudo nano index.nginx-debian.html
+
+  GNU nano 4.8                index.nginx-debian.html
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+
+을 display 한다.
+
+DNS 하려면 내도메인.한국 들어가서 생성

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>API TEST</h1>
+    <button>서버의 데이터 가져오기</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const button=document.querySelector('button');
+        button.addEventListener('click',async function(){
+            try {
+                const response =await axios.get("http://localhost:8080/api/info");
+                console.log(response);
+            } catch (error) {
+                console.log(error);
+            }
+        })
+    </script>
+</body>
+</html>

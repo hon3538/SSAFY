@@ -62,7 +62,7 @@ void dfs(int now)
                 else dit = stair[s][i].toStair2;
                 int ret;
                 int Time = dit + len+1; //거리 +계단 길이 -> 아직 못나온상태 +1을 해줘야 나온다
-
+             
                 if (pool.size() >= 3)
                 {
                     int e = pool.front();

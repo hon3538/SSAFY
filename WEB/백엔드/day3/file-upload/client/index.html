@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="input-file" type="file">
+    <button id="submit-button" type="button">파일 버튼</button>
+    <!-- <form action="" method="[pst" enctype="multipart/form-data">
+        <input type="file">
+    </form> 원래는 이렇게 form tag로 감싸서 파일을 전송해야함--> 
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.27.2/dist/axios.min.js"></script>
+    <script>
+        const inputFile= document.querySelector('#input-file');
+        const submitButton=document.querySelector('#submit-button');
+        submitButton.addEventListener('click',()=>{
+            console.log(inputFile.files);
+            //이정보를 axios를 통해 전송해야함
+            //근데 이슈가 있음, 원래 파일은 form태그에서 보내는것임
+            //axios로 전송하려면 강제로 form형식을 만들어서 감싸야한다. 아래는 그냥 외우는 영역..
+            const formData= new FormData();
+            //formData에 값 넣는 법 formData.append('키','value');
+            formData.append('file',inputFile.files[0]);
+            //파일 전송시 Content-Type:"multipart/form-data"
+            axios.post('http://localhost:8080/api/file',formData,{
+                headers:{
+                    "Content-Type" : "nultipart/form-data"
+                }
+            })
+        })
+    </script>
+</body>
+</html>

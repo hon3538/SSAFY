@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <label for="menu_name">메뉴이름</label>
+        <input id="menu_name">
+    </div>
+    <div>
+        <label for="menu_description">menu description</label>
+        <input id="menu_description">
+    </div>
+    <div>
+        <!-- 버튼을 클릭하면 메뉴를 서버로 보냄..? -->
+        <button>메뉴 등록</button> 
+    </div>
+    <!-- axios 로 API 서버에 요청을 보내서 요청이 잘 들어오는 지 확인하기 위해 클라이언트를 만드는중 -->
+    <!-- localhost:8080/api/menus -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const button=document.querySelector("button");
+        button.addEventListener('click',async()=>{
+            //input data -> value
+            // 그외 html -> textContent
+            const menu_name = document.querySelector("#menu_name").value;
+            const menu_description=document.querySelector("#menu_description").value;
+            //post 요청을 보낼것
+            //데이터를 같이 보낼것 (백엔드에서는 현재 못받는 상태)
+            //body에 데이터를 같이 실어서 백엔드 서버로 보낸다.
+            const result = await axios.post("http://localhost:8080/api/menus",{
+                menu_name:menu_name,
+                //key랑 value가 같으면 생략이 가능
+                menu_description
+            });
+        })
+        // //GET TEST
+        // async function getTest(){
+        //     const result=await axios.get("http://localhost:8080/api/menus");
+        //     console.log(result);
+        // }
+        // getTest();
+        //이렇게만 하면 에러가 뜬다.
+        //프론트 라이브 서버는 5500 port다. 
+        //백엔드 서버는 8080 port이다. 
+        //도메인(localhost)는 같지만 서로 포트가 다르기 때문에 cors이슈가 난다.
+        //cors가 발생하지 않으려면 도메인도 같고 포트도 같아야한다.
+        //그래서 백엔드 서버에 cors 셋팅을 해줘야한다. 
+        //원래라면 http header를 세팅해줘야한다. 하지만 cors 라이브러리로 편하게 사용할 수 있다.
+
+        // //POST TEST
+        // async function postTest(){
+        //     const result = await axios.post("http://localhost:8080/api/menus");
+        //     console.log(result);
+        // }
+        // postTest();
+    </script>
+</body>
+</html>

@@ -43,7 +43,7 @@ void check(int dy, int dx, int size, int isBefore) {
 }
 void dfs(int level,int startY,int startX) { //level 은 색종이 사용개수랑 같음
     //백트랭킹
-    if (level >= ans)
+    if (level >= ans) // 현재 값보다 더 많은 색종이 사용할 경우
         return;
     //기저조건
     if (total == cntArea) {

@@ -44,7 +44,7 @@ int main(){
         }
     }
     for(int i=0;i<=target;i++){
-        cout<<DP[i]
+        cout<<DP[i];
     }
     return 0;
 }

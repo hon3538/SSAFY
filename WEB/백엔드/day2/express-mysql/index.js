@@ -7,7 +7,7 @@ const pool=require("./db");
 //api/menus에 오면
 //db에 있는 menus를 조회해서 가져오기
 app.get("/api/menus",async(req,res)=>{
-    const data=await pool.query("SELECT * FROM menus");
+    const data=await pool.query("SELECT * FROM menus where menu_id=1");
 
     return res.json(data[0]);
 })

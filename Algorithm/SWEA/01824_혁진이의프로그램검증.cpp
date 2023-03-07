@@ -11,7 +11,7 @@
 //아무것도 하지 않는 문자 -> 메모리상황과 현재 방향 같은지로 visit
 #include <iostream>
 #include <string>
-
+#include <cstring>
 using namespace std;
 int R, C; //R 행 C열 (2~20)
 char map[20][20];
@@ -27,7 +27,7 @@ string ans;
 int dir[4][2] = { -1,0,0,1,1,0,0,-1 };
 void getDir(int y, int x) { //? 와 @는 skip
 	char c = map[y][x];
-	if (c == '.' || (c >= '0'&&c <= '9') || c == '+' || c == '-') return;
+	if (c == '.' || (c >= '0' && c <= '9') || c == '+' || c == '-') return;
 	else if (c == '<') d = 3;
 	else if (c == '>') d = 1;
 	else if (c == '^') d = 0;
@@ -46,7 +46,8 @@ void getMem(int y, int x) {
 	char c = map[y][x];
 	if (c == '+') mem++;
 	else if (c == '-') mem--;
-	else if (c >= '0'&&c <= '9') mem = c - '0';
+	else if (c >= '0' && c <= '9') mem = c - '0';
+
 	if (mem < 0) mem = 15;
 	else if (mem > 15) mem = 0;
 	return;
@@ -54,11 +55,11 @@ void getMem(int y, int x) {
 void func() {
 
 	while (1) {
-		
+
 		int dy = now.y + dir[d][0];
 		int dx = now.x + dir[d][1];
 
-		
+
 		if (dy < 0) dy = R - 1;
 		if (dy >= R) dy = 0;
 		if (dx < 0) dx = C - 1;
@@ -81,7 +82,10 @@ void func() {
 			int tempMem = mem;
 			for (int i = 0; i < 4; i++) {
 				d = i;
+				visitedDir[d][dy][dx] = 1;
 				func();
+				now.y = dy;
+				now.x = dx;
 				mem = tempMem;
 			}
 			return;
@@ -107,29 +111,30 @@ int main() {
 		ans = "NO";
 		memset(visitedDir, 0, sizeof(visitedDir));
 		memset(visitedMem, 0, sizeof(visitedMem));
+		visitedMem[mem][0][0] = 1;
+		visitedDir[d][0][0] = 1;
 		// 처음에 ?이면
 		if (map[0][0] == '?')
 		{
 			for (int i = 0; i < 4; i++)
 			{
 				d = i;
+				visitedDir[d][0][0] = 1;
 				func();
+				mem = 0;
 			}
 		}
 		else
 		{
-			if (map[0][0] == '@') { ans = "YES"; break; }
-			getDir(0, 0);
-			getMem(0, 0);
-			visitedMem[mem][0][0] = 1;
-			visitedDir[d][0][0] = 1;
-			func();
+			if (map[0][0] == '@') { ans = "YES"; }
+			else {
+				getDir(0, 0);
+				getMem(0, 0);
+				func();
+			}
 		}
-		cout <<'#'<<t+1<<' '<< ans<<'\n';
+		cout << '#' << t + 1 << ' ' << ans << '\n';
 	}
 
 	return 0;
 }
-/*
-
-*/

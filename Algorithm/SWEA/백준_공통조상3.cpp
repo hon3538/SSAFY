@@ -3,24 +3,43 @@
 //두 번째 노드에서 마찬가지로 진행할때 visited 된 첫 부모가 가장 가까운 공통 조상이다.
 #include <iostream>
 #include <cstring>
-
+#include <vector>
 using namespace std;
 int N;
-int parent[10001]; //index : 자식 , value : 부모
-int DAT[10001]; //index: 부모, value: 찾는 자식의 부모여부
+int input1,input2;
+vector<int>v[10001];
 int ans;
-void Find(int now1, int now2){   
-    if(now1!=0&&DAT[now1]==1){
-        ans=now1;
+int parent[10001];
+int Find(int now){
+    if(now==parent[now])
+        return now;
+    return parent[now]=Find(parent[now]);
+}
+void Union(int A,int B){
+    int pa=Find(A);
+    int pb=Find(B);
+    if(pa==pb)
         return;
+    parent[pb]=pa;
+}
+int func(int now){
+    int count=0;
+    int flag=false;
+    if(now==input1||now==input2){
+        count++;
+        flag=true;
     }
-    DAT[now1]=1;
-    if(now2!=0&&DAT[now2]==1){
-        ans=now2;
-        return;
+    
+    for(int i=0;i<v[now].size();i++){
+        int next=v[now][i];
+
+        int ret=func(next);
+        if(ret==1) {count++; flag=true;}
     }
-    DAT[now2]=1;
-    Find(parent[now1],parent[now2]);
+    if(count==2) ans=now;
+    if(flag) return 1;
+
+    return 0;
 }
 int main(){
     int T;
@@ -28,18 +47,23 @@ int main(){
     for(int t=0;t<T;t++){
         cin>>N;
         ans=0;
+        for(int i=1;i<=N;i++){
+            parent[i]=i;
+        }
         for(int i=0;i<N-1;i++){
             int a,b;
             cin>>a>>b; //a가 b의 부모
-            parent[b]=a;
+            v[a].push_back(b);
+            if(Find(a)!=Find(b)){
+                Union(a,b);
+            }
         }
-        int target1,target2;
-        cin>>target1>>target2;
-        Find(target1,target2);
+        cin>>input1>>input2;
+        func(Find(1));
         cout<<ans<<'\n';
-        memset(parent,0,sizeof(parent));
-        memset(DAT,0,sizeof(DAT));
+        for(int i=0;i<=N;i++){
+            v[i].clear();
+        }
     }
-
     return 0;
 }

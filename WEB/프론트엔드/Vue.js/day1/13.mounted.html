@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- vue에서 DOM에 접근할 경우 ref 활용 -->
+        <input ref="input_ref" type="text">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.min.js"></script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            created(){
+                console.log('created');
+                //this.$refs
+                console.log(this.$refs);
+                console.log(this.$refs.input_ref);
+            },
+            mounted(){
+                console.log('mounted');
+                console.log(this.$refs);
+                console.log(this.$refs.input_ref);
+                //DOM에 접근할 특별한 경우
+                //focus가 대표적
+                this.$refs.input_ref.focus();
+            }
+        })
+    </script>
+</body>
+</html>

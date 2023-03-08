@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>클릭 전</h1>
+    <button>hey</button>
+    <script>
+        //순수 자바스크립트.ver 클릭 이벤트
+        //button을 클릭하면 h1 태그의 내용을 클릭함으로 변경
+        const h1 = document.querySelector('h1');
+        const button=document.querySelector('button');
+        button.addEventListener('click',()=>{
+            h1.textContent="클릭함";
+        })
+    </script>
+</body>
+</html>

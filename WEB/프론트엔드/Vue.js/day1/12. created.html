@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{todo}}
+        <div>{{todo.id}}</div>
+        <div>{{todo.title}}</div>
+        <div>{{todo.completed}}</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.min.js"></script>
+    <script>
+        const app = new Vue({
+            //element 중에 id가 app인 것에 대해 적용
+            el:"#app",
+            //데이터 정의
+            data(){
+                return{
+                    todo:{}
+                }
+            },
+            //라이프사이클 created -> 내장되어있다
+            //created은 데이터를 비동기 호출하기 좋은 시점
+            async created(){
+                const result=await axios.get("https://jsonplaceholder.typicode.com/todos/1");
+                console.log(result.data);
+                //호출이 되었고 이 데이터를 todo에 넣는다
+                this.todo=result.data;
+            }
+        })
+    </script>
+</body>
+</html>

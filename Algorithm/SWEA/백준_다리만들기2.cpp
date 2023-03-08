@@ -69,6 +69,7 @@ void getLen() { //해당 섬에서 각 섬의 길이 찾기
                                 length[now][next] = dist;
                                 length[next][now] = dist;
                             }
+                            //여기에 바로 pq 를 넣어줘도 될듯.. 어차피 MST 할건데 중복되도 상관없을듯..
                         }
                         break;
                     }

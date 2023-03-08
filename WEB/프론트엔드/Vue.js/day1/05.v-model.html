@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- v-model 만 쓰면 input에 입력해줘도 message 변수값에 저장이됨 -->
+        <input type="text" v-model="message">
+        {{message}}
+        <div>
+            <!-- 단방향 -->
+            <input v-bind:value="message">
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.min.js"></script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            //데이터 정의
+            data(){
+                return{
+                    message:"test"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- vue에서 데이터를 나타날때{{}} -->
+        {{message}}
+        <!-- vue에서 이벤트를 활용하는 경우 inline방식으로 작성 
+         v-on:click -> 클릭 이벤트
+         v-on: 은 @로 대체가 가능하다.
+         v-on:click="bbq" 와 @click="bbq" 는 같다 
+        -->
+        <button v-on:click="bbq"></button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.min.js"></script>
+    <script>
+        const app = new Vue({
+            //element 중에 id가 app인 것에 대해 적용
+            el:"#app",
+            //데이터 정의
+            data(){
+                return{
+                    message:"Hello Vue"
+                }
+            },
+            //vue 내부에서 data를 변경하는 경우 해당 methods에 정의한다
+            methods:{
+                bbq(){
+                    //html 파트 외부에서 data나 다른 methods에 접근하는 경우
+                    //this를 붙여야한다
+                    console.log(this.message);
+                    //다른 methods를 가져오는 경우도 this로 가져온다
+                    this.test();
+                },
+                test(){
+                    console.log("check");
+                }
+            }
+        })
+    </script>
+</body>
+</html>

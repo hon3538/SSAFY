@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- v-for="(변수,index) in lists" v-bind:key="index"  
+            key를 넣는 이유는 Virtual DOM 설정시 중복방지 (나중에)
+        -->
+        <ul>
+            <li v-for="(li,index) in lists" :key="index">
+                {{li}}
+            </li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.min.js"></script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data(){
+                return{
+                    //원래는
+                    //lists.reduce((acc,cur)=>{html 태그~~~}) 이렇게 해야되서 비효율적
+                    lists:["밥먹기","점심먹기","코딩하기"]
+                }
+            }
+        })
+    </script>
+</body>
+</html>

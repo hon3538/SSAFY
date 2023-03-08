@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //vue.js에서 mvvm 모델이라고 있는데
+        //데이터와 html을 일치화 시키는 방식
+        const h1=document.createElement('h1');
+        document.querySelector('body').append(h1);
+        
+        const viewModel={}
+        let model ="";
+        Object.defineProperty(viewModel,'model',{
+            get(){
+                return model
+            },
+            set(value){
+                model=value;
+                h1.textContent=model;
+            }
+        });
+    </script>
+</body>
+</html>

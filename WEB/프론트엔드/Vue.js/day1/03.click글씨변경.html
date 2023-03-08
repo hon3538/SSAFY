@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{message}}</h1>
+        <button v-on:click="haha">클릭</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.min.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    message: "클릭을 눌러주세요.",
+                    newMessage1:"하하",
+                    newMessage2:"헤헤",
+                }
+            },
+            methods:{
+                haha(){
+                    this.message =this.newMessage1;
+                    this.hehe();
+
+                    console.log(this.message);
+                    
+                },
+                async hehe(){
+                  setTimeout(()=>{
+                    this.message=this.newMessage2;
+                    console.log(this.message);
+                  },5000);
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

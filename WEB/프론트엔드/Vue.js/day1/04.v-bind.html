@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .colorBlue{
+            color:blue;
+        }
+        .colorRed{
+            color:red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 태그 안에 내용은 {{}} -->
+        <!-- v-bind:href===:href 
+         :표시된 내용은 vue에 정의된 내용이 들어간다
+          class.. style도 다 가능
+        -->
+        <a v-bind:href="url1" :style="color">구글</a>
+        <a :href="url2" v-bind:class="cla">네이버</a>
+        <button v-on:click="change">컬러바꾸기</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.min.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    url1:"https://google.com",
+                    url2:"https://naver.com",
+                    color:"",
+                    cla:"colorBlue"
+                }
+            },
+            methods:{
+                change(){
+                    this.color="color:grey";
+                    this.cla="colorRed";
+                    console.log("hh");
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

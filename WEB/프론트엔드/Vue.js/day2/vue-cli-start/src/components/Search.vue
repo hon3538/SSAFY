@@ -1,12 +1,12 @@
 <template>
-<div>
-  Navigation
-</div>
+  <div>
+    Search
+  </div>
 </template>
 
 <script>
 export default {
-    
+
 }
 </script>
 

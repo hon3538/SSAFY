@@ -1,12 +1,12 @@
 <template>
-<div>
-  Navigation
-</div>
+  <div>
+    TEST
+  </div>
 </template>
 
 <script>
 export default {
-    
+
 }
 </script>
 

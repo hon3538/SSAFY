@@ -81,13 +81,13 @@ app.post('/api/menus',upload.single('origin'),async (req,res)=>{
         `,[name,description,file_path]);
 
         return res.json({
-            succese:true,
+            success:true,
             message:"메뉴 등록에 성공하였습니다."
         })
     } catch (error) {
         console.log(error);
         return res.json({
-            succese:false,
+            success:false,
             message:"메뉴 등록에 실패하였습니다."
         })
     }

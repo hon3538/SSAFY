@@ -40,19 +40,7 @@ int getNode(int now, int target) { // 같은 뎁스의 노드를 구한다
     }
     return DP[now][0]; //depth 가 같은 node;
 }
-/*int getNode(int now, int target) { // 같은 뎁스의 노드를 구한다
-    //now가 시작지점
-    //target은 target depth
-    int j = 0;
-    while (depth[now] != target) {
-        if (depth[DP[now][j]] < target) {
-            now = DP[now][j - 1];
-            j = -1;
-        }
-        j++;
-    }
-    return now; //depth 가 같은 node;
-}*/
+
 int ps(int a, int b) {
     //#1 depth 차이
     //뭐가 더 뎁스큰지알아야지

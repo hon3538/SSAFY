@@ -10,7 +10,7 @@
     <footer>
       <div>All right reserved</div>
       <router-link to ="/admin/home">관리자페이지(메뉴)</router-link>
-      <router-link to ="/order/home">메인페이지(주문)</router-link>
+      <router-link to ="/">메인페이지(주문)</router-link>
     </footer>
   </div>
 </template>

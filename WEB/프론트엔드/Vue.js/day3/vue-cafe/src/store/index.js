@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    title:"SSAFY-CAFE"
+    title:"SSAFY-CAFE",
+    DOMAIN:"http://localhost:8080",
   },
   getters: {
   },

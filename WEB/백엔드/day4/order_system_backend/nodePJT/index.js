@@ -202,4 +202,23 @@ app.post('/api/orders',async (req,res)=>{
         })
     }
 })
+//DELETE
+app.delete('/api/orders/:id',async (req,res)=>{
+    try {
+        const data= pool.query(`
+            DELETE from orders where id=?
+        `,[req.params.id]);
+        return res.json({
+            success: true,
+            message:"주문 삭제에 성공하였습니다."
+        })
+
+    } catch (error) {
+        console.log(error);
+        return res.json({
+            success:false,
+            message:"주문 삭제에 실패하였습니다."
+        })
+    }
+})
 app.listen(PORT,()=>console.log(`${PORT} 서버 기동중`));

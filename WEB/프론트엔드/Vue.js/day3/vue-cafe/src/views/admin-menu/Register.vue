@@ -1,6 +1,5 @@
 <template>
   <div>
-    asddas
     <div class="form-wapper">
         <div>메뉴 이름: <input v-model="name"></div>
         <div>메뉴 설명: <input v-model="description"></div>

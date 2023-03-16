@@ -44,7 +44,7 @@ export default {
         },
         async Delete(id){
            const result = await api.orders.delete(id);
-          this.$router.go(0);
+           this.$router.go(0);
            console.log(result);
         }
     }

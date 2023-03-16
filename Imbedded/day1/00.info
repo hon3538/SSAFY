@@ -1,0 +1,4 @@
+터미널 종료 명령어
+ctrl + alt + t
+종료 명령어
+sudo shutdown -h now

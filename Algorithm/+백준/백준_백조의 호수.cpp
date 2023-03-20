@@ -16,18 +16,7 @@ struct NODE {
 };
 vector<NODE>point;
 int dir[4][2] = { -1,0,0,1,1,0,0,-1 };
-void print_debug(int dy,int dx) {
-	for (int y = 0; y < R; y++) {
-		for (int x = 0; x < C; x++) {
-			if (y == dy && x == dx) {
-				cout << 'C';
-				continue;
-			}
-			cout << map[y][x];
-		}
-		cout << '\n';
-	}
-}
+
 int dijkstra(int y, int x) {
 	priority_queue<NODE>pq;
 	visited[y][x] = 1;
@@ -36,7 +25,7 @@ int dijkstra(int y, int x) {
 	while (!pq.empty()) {
 		NODE now = pq.top();
 		pq.pop();
-		//print_debug(now.y, now.x);
+
 		if (Max < now.c)
 			Max = now.c;
 		if (now.y == point[1].y&&now.x == point[1].x) {
@@ -51,9 +40,7 @@ int dijkstra(int y, int x) {
 			int next = now.c;
 			if (map[dy][dx] == 'X') next++;
 			if (map[dy][dx] == '.') next = 1;
-			if (dy == point[1].y&&dx == point[1].x) {
-				return (Max - 1) / 2 + (Max - 1) % 2;
-			}
+
 			if (visited[dy][dx]!=0&&visited[dy][dx] <=next) continue;
 			visited[dy][dx] = next;
 			pq.push({ dy,dx,next });

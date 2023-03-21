@@ -66,12 +66,43 @@ extern void init(int N, int M, char words[MAX_M][WORD_MAXLEN]){
         um.insert({words[i],1});
         initial[words[i][0]-'A'].push(words[i]);
         string rev=getRev(words[i]);
-        um.insert({rev,1});
+        um.insert({rev,0});
     }
 
 }
+int dead[50001];
 extern int playGame(int playerId, char startCh){
-    
+    int id =playerId;
+    string arr[50000];
+    int index=0;
+    int ret;
+    while(1){
+        if(dead[playerId]==1){ //최적화 필요할듯, 메모리풀 Linkedlist
+            playerId++;
+            continue;
+        }
+        if(initial[startCh-'A'].empty()){
+            ret=playerId;
+            break;
+        }
+        string word=initial[startCh-'A'].top();
+        initial[startCh-'A'].pop();
+        if(um[word]==1){ //만약 이미 사용했으면
+            ret=playerId;
+            break;
+        }   
+        um[word]=1;
+        string rev=getRev(word);
+        if(um[rev]==0) //반대를 사용 안 했으면
+            arr[index++];
+        startCh=word[0];
+        playerId++;
+    }
+    for(int i=0;i<index;i++){
+        initial[arr[i][0]-'A'].push(arr[i]);
+    }
+    dead[ret]=1;
+    return ret;
 }
 
 static char words[MAX_M][WORD_MAXLEN];

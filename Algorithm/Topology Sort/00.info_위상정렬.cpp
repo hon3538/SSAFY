@@ -21,11 +21,11 @@
 #include<queue>
 using namespace std;
 
-#define NODE_MAX 10000
+#define NODE_MAX 32000
 int N; // 정점 개수
 int V;// 간선 개수
-int inDegree[NODE_MAX]; //진입차수
-vector<int>v[NODE_MAX]; //그래프 정보
+int inDegree[NODE_MAX+1]; //진입차수
+vector<int>v[NODE_MAX+1]; //그래프 정보
 queue<int>q; // 위상 정렬을 위한 진입차수 0 큐
 
 //hint : 모든 노드를 한번 씩 들리기 때문에 N번 탐색한다.
@@ -43,7 +43,7 @@ void topology_sort(){
         int now=q.front();
         q.pop();
 
-        cout<<now<<'\n';
+        cout<<now<<' ';
         for(int j=0;j<v[now].size();j++){
             int next=v[now][i];
             inDegree[next]--;
@@ -61,5 +61,6 @@ int main(){
         inDegree[b]++;
         v[a].push_back(b);
     }
-
+    topology_sort();
+    return 0;
 }

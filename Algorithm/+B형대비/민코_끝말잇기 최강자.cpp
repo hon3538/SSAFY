@@ -29,79 +29,88 @@
 #include<vector>
 #include<unordered_map>
 #include<string>
+#include<cstring>
 using namespace std;
 #define MAX_N 50000
 #define MAX_M 50000
 #define WORD_MAXLEN 11
 
-
-string getRev(string input){
-    int size=input.length();
-    int i=0;
-    while(i<size){
+string arr[50000];
+int dead[50001];
+int NumPlayer;
+int NumWords;
+string getRev(string input) {
+    int size = input.length();
+    int i = 0;
+    while (i < size/2) {
+        char temp = input[i];
+        input[i] = input[size -1 - i];
+        input[size -1 - i] = temp;
         i++;
-        int temp=input[i];
-        input[i]=input[size-1-i];
-        input[size-1-i]=temp;
     }
     return input;
 }
-unordered_map<string,int>um;//단어 목록
-struct cmp{
-    bool operator()(string s1,string s2){
-        return s1>s2; //사전순 정렬
+unordered_map<string, int>um;//단어 목록
+/*struct cmp {
+    bool operator()(string s1, string s2) {
+        return s1 > s2; //사전순 정렬
     }
-};
-priority_queue<string,vector<string>,cmp>initial[26];
-extern void init(int N, int M, char words[MAX_M][WORD_MAXLEN]){
+};*/
+priority_queue<string, vector<string>, greater<string>>initial[26];
+extern void init(int N, int M, char words[50000][11]) {
     um.clear();
-    for(int i=0;i<26;i++){
-        while(!initial[i].empty()){
+    for (int i = 0; i < 26; i++) {
+        while (!initial[i].empty()) {
             initial[i].pop();
         }
     }
-
+    memset(dead, 0, sizeof(dead));
+    memset(arr, 0, sizeof(arr));
+    NumPlayer = N;
+    NumWords = M;
     //모든 값(거꾸로 포함)을 해쉬에 집어넣고
-    for(int i=0;i<M;i++){
-        um.insert({words[i],1});
-        initial[words[i][0]-'A'].push(words[i]);
-        string rev=getRev(words[i]);
-        um.insert({rev,0});
+    for (int i = 0; i < M; i++) {
+        um.insert({ words[i],0 });
+        initial[words[i][0] - 'a'].push(words[i]);
+        string rev = getRev(words[i]);
+        um.insert({ rev,0 });
     }
 
 }
-int dead[50001];
-extern int playGame(int playerId, char startCh){
-    int id =playerId;
-    string arr[50000];
-    int index=0;
+extern int playGame(int playerId, char startCh) {
+    int id = playerId;
+    int index = 0;
     int ret;
-    while(1){
-        if(dead[playerId]==1){ //최적화 필요할듯, 메모리풀 Linkedlist
+    //memset(arr, 0, sizeof(arr));
+    while (1) {
+        if (dead[playerId] == 1) { //최적화 필요할듯, 메모리풀 Linkedlist
             playerId++;
+            if (playerId > NumPlayer) playerId = 1;
             continue;
         }
-        if(initial[startCh-'A'].empty()){
-            ret=playerId;
+        if (initial[startCh - 'a'].empty()) {
+            ret = playerId;
             break;
         }
-        string word=initial[startCh-'A'].top();
-        initial[startCh-'A'].pop();
-        if(um[word]==1){ //만약 이미 사용했으면
-            ret=playerId;
+        string word = initial[startCh - 'a'].top();
+        initial[startCh - 'a'].pop();
+        if (um[word] == 1) { //만약 이미 사용했으면
+            ret = playerId;
             break;
-        }   
-        um[word]=1;
-        string rev=getRev(word);
-        if(um[rev]==0) //반대를 사용 안 했으면
-            arr[index++];
-        startCh=word[0];
+        }
+        um[word] = 1;
+        string rev = getRev(word);
+        if (um[rev] == 0) //반대를 사용 안 했으면
+            arr[index++]=rev;
+        int last = word.length() - 1;
+        startCh = word[last];
         playerId++;
+        if (playerId > NumPlayer) playerId = 1;
     }
-    for(int i=0;i<index;i++){
-        initial[arr[i][0]-'A'].push(arr[i]);
+    for (int i = 0; i < index; i++) {
+        initial[arr[i][0] - 'a'].push(arr[i]);
     }
-    dead[ret]=1;
+    dead[ret] = 1;
     return ret;
 }
 

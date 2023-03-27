@@ -16,43 +16,65 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <cstring>
 using namespace std;
-int N,Q;
-struct Edge{
+#define MAX 2100000000
+
+int N, Q;
+int K;
+struct Edge {
     int to;
     int cost;
     int Min;
+
+    bool operator < (Edge o) const {
+        return Min < o.Min;
+    }
 };
 vector<Edge>v[5001];
-//int visited[]
-int dijkstra(int start){
+int dist[5001]; //최대 USADO 담기
+int dijkstra(int start) {
     priority_queue<Edge>pq;
-    pq.push({start,10000,10000});
-
-    while(!pq.empty()){
-        Edge now=pq.top();
+    pq.push({ start,MAX,MAX });
+    dist[start] = MAX;
+    int ans = -1;
+    while (!pq.empty()) {
+        Edge now = pq.top();
         pq.pop();
+        
+        if (dist[now.to] > now.Min) continue;
+        if (K > now.Min) break;
+            ans++;
 
-        for(int i=0;i<v[now.to].size();i++){
+        for (int i = 0; i < v[now.to].size(); i++) {
+            Edge next = v[now.to][i];
+            
+            next.Min = min(next.cost, now.Min);
+            if (dist[next.to] >= next.Min) continue;
+            dist[next.to] = next.Min;
 
+            pq.push(next);
         }
     }
+    return ans;
 }
-int main(){
-    cin>>N>>Q;
+int main() {
+    cin >> N >> Q;
     //graph 정보 입력
-    for(int i=0;i<N-1;i++){ 
-        int a,b,c; 
-        cin>>a>>b>>c;
-        v[a].push_back({b,c});
-        v[b].push_back({a,c});
+    for (int i = 0; i < N - 1; i++) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        v[a].push_back({ b,c });
+        v[b].push_back({ a,c });
     }
     // 출발 노드에서 k 값보다 큰 USADO를 구하라
-    // k보다 USADO가 작아지는 순간 out
-    for(int i=0;i<Q;i++){
-        int k,start;
-        cin>>k>>start;
-        int ret=dijkstra(start); // 가능한 동영상 개수출력
+    // k보다 USADO가 작아지는 순간 out -> 다음 요소가 답일 가능성도 있으니 X
+    for (int i = 0; i < Q; i++) {
+        int start;
+        cin >> K >> start;
+        memset(dist, 0, sizeof(dist));
+        int ret = dijkstra(start); // 가능한 동영상 개수출력
+        cout << ret << '\n';
     }
     return 0;
 }

@@ -66,8 +66,6 @@ int run() {
 	//0 흰 1빨 2파
 	while (turn <= 1000) {
 		turn++;
-		// deb();
-		// cout << '\n';
 		for (int i = 1; i <= K; i++) { //1~K번말 한번씩 이  
 			if (status[v[i].y][v[i].x][0] != i) continue;
 			int dy = v[i].y + dir[v[i].d][0];
@@ -95,9 +93,6 @@ int run() {
 			else if (map[dy][dx] == 1) { //빨간색이면,
 				red(dy, dx, i);
 			}
-			// deb();
-			// cout << '\n';
-
 		}
 		if (sum >= 4)
 			break;

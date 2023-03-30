@@ -38,6 +38,6 @@ int main(){
     //a=0x09 b=0x0a c=0x0a09
     //c는 ab의 메모리를 공유하는데 리틀라디안이라서 읽을 때 반대로 꺼내온다
 
-    union UNI t3={.d=0xABCD}; //메모리에 CD AB 로 저장
+    union UNI3 t3={.d=0xABCD}; //메모리에 CD AB 로 저장
     //d=0xABCD, a=0xCD, b=0xAB, c=0xABCD
 }

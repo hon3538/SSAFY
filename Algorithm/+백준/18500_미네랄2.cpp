@@ -17,9 +17,10 @@ struct Node {
 Node h; //y범위
 Node w; //x범위
 
-void remove(int isLeft, int height) {
+int remove(int isLeft, int height) { //x값 리턴
+    int x;
     if (isLeft % 2 == 0) {
-        int x = 0;
+        x = 0;
         while (x < C) {
             if (map[height][x] == 'x') {
                 map[height][x] = '.';
@@ -27,9 +28,10 @@ void remove(int isLeft, int height) {
             }
             x++;
         }
+        x--;
     }
     else {
-        int x = C - 1;
+        x = C - 1;
         while (x >= 0) {
             if (map[height][x] == 'x') {
                 map[height][x] = '.';
@@ -37,7 +39,9 @@ void remove(int isLeft, int height) {
             }
             x--;
         }
+        x++;
     }
+    return x;
 }
 int dir[4][2] = { -1,0,0,1,1,0,0,-1 };
 int floodfill(int y, int x,int n) { //떨어질 게 있는지 확인
@@ -70,6 +74,42 @@ int floodfill(int y, int x,int n) { //떨어질 게 있는지 확인
     h = { y,floor };
     w = { Left,Right };
     return floor;
+}
+int xList[100];
+int getGap(int n){
+    queue<Node>q;
+    q.push({h.y,w.y});
+    visited[h.y][w.y]=-1;
+    memset(xList,0,sizeof(xList));
+    int max=-1;
+    while(!q.empty()){
+        Node now =q.front();
+        q.pop();
+        int n=1;
+        while(1){
+            if(now.y+n>=R) break;
+            if(visited[now.y+n][now.x]==n||visited[now.y+n][now.x]==-1){
+                 n=-1;
+                 break;
+            }
+            if(visited[now.y+n][now.x]!='.'){
+                break;
+            }
+            n++;
+        }
+        if(max<n-1) max=n-1;
+
+        for(int i=0;i<4;i++){
+            int dy=now.y+dir[i][0];
+            int dx=now.x+dir[i][1];
+            if(dy<0||dx<0||dy>=R||dx>=C) continue;
+            if(map[dy][dx]!='x') continue;
+            if(visited[dy][dx]==-1) continue;
+            visited[dy][dx]=-1;
+            q.push({dy,dx});
+        }
+    }
+    return max;
 }
 void update(int n) { //맵 업데이트
     for (int y = h.x + n; y >= h.y+n; y--) {
@@ -105,24 +145,23 @@ int main() {
     for (int i = 0; i < N; i++) {
         int n;
         cin >> n;
-        remove(i, (R - 1) - (n - 1));
-        deb();
+        int y=(R - 1) - (n - 1);
+        int x=remove(i, y);
         int cnt = 1;
+        int ret=R-1;
         memset(visited, 0, sizeof(visited));
-        int flag = 0;
-        for (int y = 0; y < R; y++) { //맵 업데이트
-            for (int x = 0; x < C; x++) {
-                if (map[y][x] == '.') continue;
-                if (visited[y][x] == 1) continue;
-                int ret=floodfill(y, x,cnt++);
-                if (ret!= R - 1) { flag=1; break; }
-            }
-            if (flag) break;
+        for(int i=0;i<4;i++){
+            int dy=y+dir[i][0];
+            int dx=x+dir[i][1];
+            if (dy < 0 || dx < 0 || dy >= R || dx >= C) continue;
+            if (map[dy][dx] == '.') continue;
+            if (visited[dy][dx] != 0) continue;
+            ret=floodfill(dy,dx,cnt++);
+            if(ret!=R-1) break;
         }
+        if(ret==R-1) continue;
 
-        if (!flag) continue; //떨어질게 없음
-        int ret = check();
-
+        int ret = getGap(cnt-1);
         update(ret);
         deb();
     }

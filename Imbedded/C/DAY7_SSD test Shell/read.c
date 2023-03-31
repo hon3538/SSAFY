@@ -16,13 +16,14 @@ void read(int LBA){
             uint8_t a :4; 
             uint8_t b :4; 
         }r;
-    }R;
+    }R; 
     fputc('0',fp2);
     fputc('x',fp2);
     for(int i=3;i>=0;i--){
         R.c=buf[i];
         fputc(R.r.b+'0',fp2);
         fputc(R.r.a+'0',fp2);
-    }
+    }   
+    fputc('\n',fp2);
     fclose(fp2);
 }

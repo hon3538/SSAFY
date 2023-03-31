@@ -8,6 +8,7 @@
              fputc('0',fp);
          }
      }   
+    fputc('\n',fp);  
     fclose(fp);
     return 0;
  }

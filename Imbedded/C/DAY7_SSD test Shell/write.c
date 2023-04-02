@@ -30,3 +30,4 @@ void write(int LBA, char* value){
     }   
     fclose(fp);
 }
+

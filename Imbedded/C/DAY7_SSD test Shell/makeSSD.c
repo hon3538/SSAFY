@@ -5,7 +5,7 @@
     
      for(int i=0;i<100;i++){
          for(int j=0;j<4;j++){
-             fputc('0',fp);
+            fputc(0x00,fp);
          }
      }   
     fputc('\n',fp);  

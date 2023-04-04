@@ -37,6 +37,7 @@ int main()
         {
             pq_front.push(a);
         }
+        
         if (b > center)
         {
             pq_back.push(b);

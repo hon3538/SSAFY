@@ -7,3 +7,8 @@
 
 //2. Test Shell Application (테스트 프로그램)
 //3. Test Script (테스트 프로그램 내에 Test Code)
+
+//SSD 사전지식
+//저장할 수 있는 최소 공간의 사이즈는 4KB
+//한 글자만 저장해도 4KB 공간이 할당됨
+//

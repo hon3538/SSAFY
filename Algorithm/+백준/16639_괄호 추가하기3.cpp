@@ -30,6 +30,8 @@ Set func(int start, int end) { //0~N/2 (마지막 index)
 		DP_min[start][end] = DP_max[start][end];
 		return { DP_max[start][end],DP_min[start][end] };
 	}
+	if(DP_max[start][end]!=0) return {DP_max[start][end],DP_min[start][end]};
+	
 	int Max = -21e8;
 	int Min = 21e8;
 	for (int i = 0; i < end - start; i++) {

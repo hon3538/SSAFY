@@ -4,3 +4,6 @@ ssize_t 의 의미는?
 맨 앞의 s -> signed, 즉 부호 있는 size_t
 size_t : typedef 된 타입, unsigned int를 size_t라고 정의한 것임.. 
 <sys/types.h> 에 정의되어 있음
+
+conmmand manual 확인
+숫자 1 : Linux Shell Command, 2 : System Call, 3 : Linux Library

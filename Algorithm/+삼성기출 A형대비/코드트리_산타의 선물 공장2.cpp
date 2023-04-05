@@ -14,92 +14,6 @@ struct Node {
 };
 
 
-class LinkedList {
-public:
-    void addFront(Node* head, Node* tail, int data) {
-        Node* newNode = new Node;
-        newNode->present = data;
-        newNode->prev = NULL;
-        if (head == NULL) {
-            head = newNode;
-            head->next = NULL;
-            tail = newNode;
-            return;
-        }
-        newNode->next = head->next;
-        head = newNode;
-    }
-    void addBack(Node* head, Node* tail, int data) {
-        Node* newNode = new Node();
-        newNode->present = data;
-        newNode->next = NULL;
-  
-        if (tail == NULL) {
-            tail = newNode;
-            tail->prev = NULL;
-            head = newNode;
-            return;
-        }
-        newNode->prev = tail->prev;
-        tail = newNode;
-    }
-    void delNode(Node* head, Node* tail, int data) {
-        Node* prev;
-        Node* delNode;
-        if (head == NULL) return;
-        if (head->next == NULL) {
-            free(head->next);
-            head = NULL;
-            return;
-        }
-        prev = head;
-        delNode = head->next;
-        while (delNode->next == NULL) {
-            prev = delNode;
-            delNode = delNode->next;
-        }
-        free(delNode);
-        prev->next = NULL;
-    }
-    Node* searchNode(Node* head, Node* tail, int order) { //order번째
-        Node* target;
-        target = head;
-        int num = 1;
-        while (num < order) {
-            target = target->next;
-            num++;
-        }
-        return target;
-    }
-};
-LinkedList list;
-
-Node* head[100001] = { NULL }; //각 linkedlist
-Node* tail[100001] = { NULL }; //각 linkedlist
-int listSize[100001];
-void factory() { //공장 설립
-    for (int i = 1; i <= m; i++) {
-        int s;
-        cin >> s;
-        
-        list.addFront(head[s], tail[s], i);
-
-        printf("%d ", head[s]->present);
-        listSize[s]++;
-    }
-    for (int i = 1; i <= n; i++) {
-        Node* now = head[i];
-        printf("%d", i);
-        if (now == NULL) continue;
-        printf("%d", i);
-        while (now != NULL) {
-            cout << now->present << ' ';
-            now = now->next;
-
-        }
-        cout << '\n';
-    }
-}
 int main() {
     cin >> q;
     for (int i = 0; i < q; i++) {  //쿼리
@@ -107,7 +21,7 @@ int main() {
         cin >> command;
         if (command == 100) { //공장설립
             cin >> n >> m;
-            factory();
+           
         }
         else if (command == 200) {//물건 모두 옮기기
             //a벨트의 모든 선물을 b벨트 앞으로 옮기고 b벨트 선물 개수 출력

@@ -1,50 +1,218 @@
-//쿼리 10만개
-//벨트 10만개
-//선물 10만개
-
+//쿼리 q 10만
+//벨트 n 10만
+//선물 m 10만
 #include <iostream>
-#include <vector>
 using namespace std;
-int q;
-int n, m; //벨트 개수(1~), 선물 개수(1~)
+//node 구현
 struct Node {
-    int present;
     Node* prev;
     Node* next;
+    int data;
+
+    Node() {
+        prev = next = NULL;
+        data = -1;
+    }
+    Node(int n, Node* before) { //before 노드 뒤에 삽입되어라       
+        next = before->next;
+        prev = before;
+        next->prev = this;
+        prev->next = this;
+        data = n;
+    }
+    void delNode() {
+        prev->next = next;
+        next->prev = prev;
+        delete this;
+    }
 };
+//list 구현
+int cnt;
+class DLL {
 
+public:
+    Node* head;
+    Node* tail;
+    int size;
+    DLL() {
+        head = new Node();
+        tail = new Node();
+        head->next = tail;
+        tail->prev = head;
+        size = 0;
+    }
+    void addFront(int data) {
+        //포인터 변수만 선언하면 메모리 할당은 안 돼있나?
+        Node* newNode = new Node(data, head);
+        size++;
+    }
+    void addBack(int data) {
+        Node* newNode = new Node(data, tail->prev);
+        size++;
+    }
+    int delFront() {
+        if (head->next == tail) return 0;
+        head->next->delNode();
+        size--;
+        return 1;
+    }
+    int delBack() {
+        if (head->next == tail) return 0;
+        tail->prev->delNode();
+        size--;
+        return 1; //성공
+    }
+    Node* findNode(int data) { //선물 번호로 정보 얻기
+        if (head->next == tail) return NULL;
+        Node* now = head;
+        while (now->next != tail) {
+            if (now->next->data == data) return now->next;
+            now = now->next;
+        }
+        return NULL;
+    }
+    Node* divGift(int n) { //n 번째 노드 출력
+        if (head->next == tail) return NULL;
+        Node* now = head->next;
+        cnt = 1;
+        while (cnt < n) {
+            now = now->next;
+            cnt++;
+        }
+        return now;
+    }
+    void show() {
+        if (head->next == tail) return;
+        Node* now = head->next;
+        while (now!= tail) {
+            printf("%d ", now->data);
+            now = now->next;
+        }
+        cout << '\n';
+    }
+}list[100001];
 
+int n, m; //벨트개수, 선물개수 
+void factory() {
+    for (int i = 1; i <= m; i++) {
+        int input;
+        cin >> input;
+        list[input].addBack(i);
+    }
+}
 int main() {
+    int q;
     cin >> q;
-    for (int i = 0; i < q; i++) {  //쿼리
+    for (int i = 0; i < q; i++) {
         int command;
         cin >> command;
-        if (command == 100) { //공장설립
+        if (command == 100) { //공장 설립
             cin >> n >> m;
-           
+            factory();
         }
-        else if (command == 200) {//물건 모두 옮기기
-            //a벨트의 모든 선물을 b벨트 앞으로 옮기고 b벨트 선물 개수 출력
+        else if (command == 200) { 
+             //상수시간 복잡도
+            int src, dst; //src의 모든 선물 dst로 옮기기
+            cin >> src >> dst;
+            
+            list[dst].head->next->prev = list[src].tail->prev;
+            list[src].tail->prev->next = list[dst].head->next;
+            list[dst].head->next = list[src].head->next; //head next 바꿔
+            list[dst].head->next->prev = list[dst].head;
 
+            //기존 리스트에서 떼주기
+            list[src].head->next = list[src].tail;
+            list[src].tail->prev = list[src].head;
+            
+            list[dst].size += list[src].size;
+            list[src].size = 0;
+            cout << list[dst].size<<'\n';
         }
-        else if (command == 300) {//앞 물건만 교체하기
-            //a벨트 앞 선물과 b벨트 앞 선물 교체, 없으면 옮기기만,
-            //b벨트 선물 개수 출력
+        else if (command == 300) { //src 벨트 앞 선물을 dst 앞 선물과 교체
+            int src, dst;
+            cin >> src >> dst;
+            //상수시간 복잡도
+            int s = list[src].head->next->data;
+            int d = list[dst].head->next->data;
+    
+            list[src].delFront();
+            list[dst].delFront();
+            if (d != -1) {
+                list[src].addFront(d);
+            }
+            if (s != -1) {
+                list[dst].addFront(s);
+            }  
+            //list[src].show();
+          //  list[dst].show();
+            cout << list[dst].size << '\n';
+        }
+        else if (command == 400) {
+            int src, dst;
+            cin >> src >> dst;
+            int target = list[src].size / 2;
+            if (target == 0) continue;
+            Node* node = list[src].divGift(target); // 최대 5만 x100회 ㄱㅊ
+            Node* temp=node->next;
+            
+            //node를 dst head에 연결
+            node->next = list[dst].head->next;
+            list[dst].head->next->prev = node;
 
-        }
-        else if (command == 400) {//물건 나누기
-            //a벨트 선물 개수=n 일때, n/2  번째까지의 모든 선물을 b벨트 앞으로 옮김
-            //b벨트의 선물 개수 출력
+            //dst head를 src head가 가리키는 곳으로 변경
+            list[dst].head->next = list[src].head->next;
+            list[dst].head->next->prev = list[dst].head;
 
-        }
-        else if (command == 500) {//선물 정보 얻기
-            //선물 번호가 주어질 때 앞번호와 뒷번호를 구해라
+            //src node 이후를 head 랑 연결
+            temp->prev = list[src].head;
+            list[src].head->next = temp;
 
+            list[dst].size += cnt;
+            list[src].size -= cnt;
+            cnt = 0;
+            cout << list[dst].size << '\n';
+         //   list[src].show();
+         //   list[dst].show();
         }
-        else if (command == 600) {//벨트 정보 얻기
-            //벨트 번호가 주어질때 맨앞 선물과 맨뒤 선물을 구해라
-        }
+        else if (command == 500) {
+            int p;
+            cin >> p;
+            int a, b;
+            for (int i = 1; i <= n; i++) {
+                Node* ret = list[i].findNode(p); //이거 줄여
+                if (ret == NULL) continue;
+                if (ret->prev == list[i].head) {
+                    a = -1;
+                }
+                else {
+                    a = ret->prev->data;
+                }
 
+                if (ret->next == list[i].tail) {
+                    b = -1;
+                }
+                else {
+                    b = ret->next->data;
+                }
+                break;
+            }
+            cout << a + 2 * b << '\n';
+        }
+        else if (command == 600) {
+            int belt;
+            cin >> belt;
+            int a, b;
+            int c = list[belt].size;
+            if (c == 0) {
+                a = -1;
+                b = -1;
+            }
+            else {
+                a = list[belt].head->next->data;
+                b = list[belt].tail->prev->data;
+            }
+            cout << a + 2 * b + 3 * c<<'\n';
+        }
     }
 
     return 0;

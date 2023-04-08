@@ -29,14 +29,14 @@ struct Node {
         p->next = this;
     }
     void delNode() {
-        prev->next = prev;
+        prev->next = next;
         next->prev = prev;
         delete this;
     }
-    
+
 };
 //hash map 배열로 각각 벨트별로 저장
-unordered_map<int, Node*>um;
+unordered_map<int, Node*>um[11];
 class DLL {
 public:
     Node* head;
@@ -64,7 +64,6 @@ public:
     }
     void show() {
         Node* now = head;
-
         while (now->next != tail) {
             cout << "ID:" << now->next->ID << " W:" << now->next->W << '\n';
             now = now->next;
@@ -86,7 +85,7 @@ void factory() {
         int ww;
         cin >> ww;
         Node* now = dll[i / (n / m) + 1].addBack(id[i], ww);
-        um.insert({ id[i],now });
+        um[i / (n / m) + 1].insert({ id[i],now });
     }
 }
 //물건 하차
@@ -96,16 +95,16 @@ void getBox() {
     int res = 0;
     for (int i = 1; i <= m; i++) {
         if (dll[i].head->next == dll[i].tail) continue;
-        int id=dll[i].head->next->ID;
+        int id = dll[i].head->next->ID;
         int w = dll[i].head->next->W;
+        um[i].erase(id);
         dll[i].delFront();
-
-        if (w<= w_max) {
-            res +=w;
-            um.erase(id);
+        if (w <= w_max) {
+            res += w;
         }
         else {
-            dll[i].addBack(id, w);
+           Node* now=dll[i].addBack(id, w);
+           um[i].insert({ id, now});
         }
     }
     cout << res << '\n';
@@ -114,19 +113,72 @@ void getBox() {
 void delBox() {
     int r_id;
     cin >> r_id;
-    if (um.find(r_id) != um.end()) {
-        um[r_id]->delNode();
-        um.erase(r_id);
-        cout << r_id << '\n';
+    int flag = 0;
+    for (int b = 1; b <= m; b++) {
+        if (um[b].find(r_id) != um[b].end()) {
+            um[b][r_id]->delNode();
+            um[b].erase(r_id);
+            flag = 1;
+            cout << r_id << '\n';
+            break;
+        }
     }
-    else {
-        cout << -1 << '\n';
-    }
+    if (!flag) cout << -1 << '\n';
 }
 //물건 확인
+void checkBox() {
+    int f_id;
+    cin >> f_id;
+    int flag = 0;
+    for (int b = 1; b <= m; b++) {
+        if (um[b].find(f_id) != um[b].end()) {
+            flag = 1;
+            cout << b<< '\n';
+            //앞으로 옮겨
+            dll[b].head->next->prev = dll[b].tail->prev;
+            dll[b].tail->prev->next = dll[b].head->next;
+            
+            um[b][f_id]->prev->next = dll[b].tail;
+            dll[b].tail->prev = um[b][f_id]->prev;
 
+            dll[b].head->next = um[b][f_id];
+            um[b][f_id]->prev = dll[b].head;
+        }
+    }
+    if (!flag) cout << -1 << '\n';
+}
 //벨트 고장
+int badBelts[11];
+void badBelt() {
+    int b_num;
+    cin >> b_num;
+    if (badBelts[b_num] == 1) {
+        cout << -1 << '\n';
+        return;
+    }
+    badBelts[b_num] = 1;
+    for (int b = 1; b <= m; b++) {
+        int num = (b_num + b)%(m+1);
+        if (num == 0) num = 1;
+        if (badBelts[num] == 1) continue;
+        if (dll[b_num].head->next == dll[b_num].tail) break;
+        dll[num].tail->prev->next = dll[b_num].head->next;
+        dll[b_num].head->next->prev = dll[num].tail->prev;
 
+        dll[num].tail->prev = dll[b_num].tail->prev;
+        dll[b_num].tail->prev->next = dll[num].tail;
+
+        dll[b_num].head->next = dll[b_num].tail;
+        dll[b_num].tail->prev = dll[b_num].head;
+
+        for (auto it = um[b_num].begin(); it != um[b_num].end(); it++) {
+            um[num].insert({ it->first,it->second });
+        }
+        um[b_num].clear();
+        break;
+    }
+    cout << b_num << '\n';
+}
 //debug()
 void debug() {
     for (int i = 1; i <= m; i++) {
@@ -142,7 +194,7 @@ int main() {
         cin >> command;
         if (command == 100) {
             factory();
-          //  debug();
+
         }
         else if (command == 200) {
             getBox();
@@ -151,11 +203,12 @@ int main() {
             delBox();
         }
         else if (command == 400) {
-
+            checkBox();
         }
         else if (command == 500) {
-
+            badBelt();
         }
+       // debug();
     }
 
     return 0;

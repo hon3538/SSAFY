@@ -41,7 +41,11 @@ void request(){
 string getDomain(string url){
     int head=0;
     int tail=url.find('/',head);
-    cout<<tail<<'\n';
+}
+int getID(string url){
+    int head=url.find('/',0)+1;
+    
+ 
 }
 void tryGrading(){
     int t;

@@ -181,6 +181,7 @@ int main(int argc,char *argv) //port를 입력받는다
 				printf("INFO :: Client want close... BYE\n");
 				break;
 			}
+			strcat(buf,"\n");
 			write(client_sock, buf, strlen(buf));
 		}
 		close(client_sock);

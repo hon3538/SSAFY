@@ -38,13 +38,23 @@ void request(){
     u_wating.insert(url);
 }
 //채점 시도
+string getDomain(string url){
+    int head=0;
+    int tail=url.find('/',head);
+    cout<<tail<<'\n';
+}
 void tryGrading(){
     int t;
     cin>>t;
     Problem now=w_list.top();
+    string domain;
+    int id;
+
+    if(u_grading.find(now.url)!=u_grading.end())
 }
 int main(){
     cin>>Q;
+    getDomain("abcdef/123");
     for(int q=0;q<Q;q++){
         int command;
         cin>>command;

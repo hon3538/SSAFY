@@ -53,7 +53,7 @@ void *sendMsg()
 		// 실제로 서버에 보낼 메세지 형태
 		// buf = "[ssafy] 안녕 얘들아"
 		sprintf(buf, "%s %s", name, msg);
-		write(sock, buf, strlen(buf));
+		wㅑrite(sock, buf, strlen(buf));
 	}
 }
 

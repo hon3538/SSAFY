@@ -7,3 +7,4 @@ size_t : typedef 된 타입, unsigned int를 size_t라고 정의한 것임..
 
 conmmand manual 확인
 숫자 1 : Linux Shell Command, 2 : System Call, 3 : Linux Library
+

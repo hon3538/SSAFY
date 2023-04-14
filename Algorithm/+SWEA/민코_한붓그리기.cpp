@@ -90,7 +90,7 @@ int main() {
                 int now = y * N + x % N;
                 int next = dy * N + dx % N;
                 int edges = getEdge(dy, dx);
-                pq.push({ now,next,i,edges });
+                pq.push({ now,next,i,edges});
 
             }
         }

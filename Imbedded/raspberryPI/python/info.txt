@@ -1,0 +1,39 @@
+장점
+: 문법이 간결(simple, easy)하다. 
+하지만 코딩이 쉬운 것은 아니다. 코딩 난이도는 언어와 상관없이 똑같다.
+
+단점
+: 느리다.
+
+쓰임새
+1. Data Science
+2. Web 개발
+3. 교육용
+
+다양한 Python 동작방법
+1. Python Shell : 단순 Test 용도 ( cmd에서 python 입력)
+2. python IDLE : Python의 대표 IDE (시작버튼에서 IDLE 입력, New file로 script 파일 작성하고 그 file 실행)
+3. OS Shell에서 Python Script 실행 : python [scriptfile.py] 로 python script 파일 실행
+4. PyCharm 사용 : Python Console 사용하여 Pycharm 내에서 python shell 사용
+
+Interpreter
+: 소스 코드를 즉시 번역하여 실행하는 프로그램
+(C는 통번역(빌드 후 run해야 결과확인 가능), python은 실시간(동시) 번역 (Run만하면 결과확인가능))
+
+파이썬으로 작성한 코드는 Script라고 부른다 (not 소스코드)
+-> 인터프리터 없이는 실행 안됨
+
+컴파일 랭퀴지 (C/C++)
+-> 소스코드라고 부른다(.c / .cpp)
+-> 컴파일 후 빌드
+
+인터프리터 랭귀지 (python)
+-> 스크립트라고 부른다(.py) / shell 스크립트도 인터프리터 랭귀지..
+-> 컴파일 없이 실행된다.
+
+요즘은 거의 하이브리드 방식이다
+-> 소스코드를 처음 컴파잉ㄹ 후, 수정 후 컴파일 할 때 일부만 컴파일 해서 동작하는 방식
+
+Python Runtime(실행기) 종류 (인터프리터)
+1.CPython : Python 기본 (씨파이썬, 파이참에서 사용중)
+2.PyPy : CPython 보다 더 빠른 Runtime

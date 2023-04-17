@@ -5,29 +5,9 @@ using namespace std;
 int N, M;
 int map[100][100];
 int dir[4][2] = { -1,0,0,1,1,0,0,-1 };
-struct Edge {
-    int from;
-    int to;
-    int dir;
-    int cnt;
-    bool operator < (Edge o) const {
-        return cnt > o.cnt;
-    }
-};
-int getEdge(int y, int x) {
-    int cnt = 0;
-    for (int i = 0; i < 4; i++) {
-        int dy = y + dir[i][0];
-        int dx = x + dir[i][1];
-        if (dy < 0 || dx < 0 || dy >= N || dx >= N) continue;
-        if (map[dy][dx] == 1) continue;
-        cnt++;
-    }
-    return cnt;
-}
-priority_queue<Edge>pq;
-int check[100][100][4];
-int visited[100][100][4];
+
+queue<int>q;
+
 int connected[100][100]; //2일떄 연결 다 됨
 int parent[10000];
 int Find(int now) {
@@ -42,27 +22,49 @@ void Union(int a, int b) {
     if (pa == pb) return;
     parent[pb] = pa;
 }
+
+int getEdge(int y, int x) {
+    int cnt = 0;
+    int now=y*N+x;
+    for (int i = 0; i < 4; i++) {
+        int dy = y + dir[i][0];
+        int dx = x + dir[i][1];
+        int next=dy*N+dx;
+        if (dy < 0 || dx < 0 || dy >= N || dx >= N) continue;
+        if (map[dy][dx] == 1) continue;
+        if(Find(now)==Find(next)) continue;
+        if(connected[dy][dx]==2) continue;
+        cnt++;
+    }
+    return cnt;
+}
+
 void kruskal() {
-
-    while (!pq.empty()) {
-        Edge now = pq.top();
-        pq.pop();
-        int y = now.from / N;
-        int x = now.from % N;
-
-        int ny = now.to / N;
-        int nx = now.to % N;
-        if (Find(now.from) == Find(now.to)) continue;
-        if (visited[y][x][now.dir] == 1) continue;
-        visited[y][x][now.dir] = 1;
-        visited[ny][nx][(now.dir + 2) % 4] = 1;
-
-        if (connected[y][x] == 2) continue;
-        if (connected[ny][nx] == 2) continue;
-        connected[y][x]++;
-        connected[ny][nx]++;
-
-        Union(now.from, now.to);
+    while (!q.empty()) {
+        int now = q.front();
+        q.pop();
+        int y = now / N;
+        int x = now % N;
+        
+        int possible=getEdge(y,x);
+        if(connected[y][x]==2) continue;
+        if(connected[y][x]+possible>2){
+            q.push(now);
+            continue;
+        }
+        
+        for(int i=0;i<4;i++){
+            int dy = y + dir[i][0];
+            int dx = x + dir[i][1];
+            int next=dy*N+dx;
+            if (dy < 0 || dx < 0 || dy >= N || dx >= N) continue;
+            if (map[dy][dx] == 1) continue;
+            if(Find(now)==Find(next)) continue;
+            if(connected[dy][dx]==2) continue;
+            connected[y][x]++;
+            connected[dy][dx]++;
+            Union(now,next);
+        }
     }
 }
 int main() {
@@ -78,21 +80,8 @@ int main() {
     for (int y = 0; y < N; y++) {
         for (int x = 0; x < N; x++) {
             if (map[y][x] == 1) continue;
-            for (int i = 0; i < 4; i++) {
-                int dy = y + dir[i][0];
-                int dx = x + dir[i][1];
-                if (dy < 0 || dx < 0 || dy >= N || dx >= N) continue;
-                if (map[dy][dx] == 1) continue;
-
-                if (check[y][x][i] == 1) continue;
-                check[y][x][i] = 1;
-
-                int now = y * N + x % N;
-                int next = dy * N + dx % N;
-                int edges = getEdge(dy, dx);
-                pq.push({ now,next,i,edges});
-
-            }
+            int now=y*N+x;
+            q.push(now);
         }
     }
     kruskal();

@@ -1,0 +1,4 @@
+I2C 센서
+1. BMP280 : 정밀한 대기압 센서, 온도 측정 가능
+-> SDA/SCL 핀이 존재하면 I2C통신을 하는 센서이다.
+(SDA:Serial Data, SCL:Serial Clock)

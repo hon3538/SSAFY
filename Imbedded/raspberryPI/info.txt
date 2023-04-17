@@ -1,39 +1,61 @@
-장점
-: 문법이 간결(simple, easy)하다. 
-하지만 코딩이 쉬운 것은 아니다. 코딩 난이도는 언어와 상관없이 똑같다.
+라즈베리파이에 썼던 모듈을 (python)
+르네사스/st 보드에 사용하고 싶다 (.c)
+-> 어떻게 할까?
 
-단점
-: 느리다.
+1. 해당 모듈이 르네사스 보드 or st보드도 지원하는지 알아본다 (라이브러리가 있는지)
+2-1. 찾으면 열심히 개발한다.
+2-2. 없다면?
 
-쓰임새
-1. Data Science
-2. Web 개발
-3. 교육용
+3. datasheet보면서 메모리 맵 보면서 비트연산하면서 data를 읽는다.
+4. python으로 제작된 라이브러리를 c로 바꾼다.
+-> class로 구현된 라이브러리 -> 함수로 변경
 
-다양한 Python 동작방법
-1. Python Shell : 단순 Test 용도 ( cmd에서 python 입력)
-2. python IDLE : Python의 대표 IDE (시작버튼에서 IDLE 입력, New file로 script 파일 작성하고 그 file 실행)
-3. OS Shell에서 Python Script 실행 : python [scriptfile.py] 로 python script 파일 실행
-4. PyCharm 사용 : Python Console 사용하여 Pycharm 내에서 python shell 사용
 
-Interpreter
-: 소스 코드를 즉시 번역하여 실행하는 프로그램
-(C는 통번역(빌드 후 run해야 결과확인 가능), python은 실시간(동시) 번역 (Run만하면 결과확인가능))
+유선 vs 무선 개발자가 더 선호하는 통신은 무엇일까?
+1. 유선 : 데이터 손실 or 디버깅이 쉽다
+2. 무선 : 디버깅이 어렵다. 데이터가 손실이 났는 지 체크가 어렵다
+-> 벽을 통과하냐 못하냐 : wkfi /blu 실제 이론과 많은 간격이 있다.
 
-파이썬으로 작성한 코드는 Script라고 부른다 (not 소스코드)
--> 인터프리터 없이는 실행 안됨
 
-컴파일 랭퀴지 (C/C++)
--> 소스코드라고 부른다(.c / .cpp)
--> 컴파일 후 빌드
+두장치끼리 글자를 주고 받으려면 어떻게 해야할까..?
+1. 유선통신을 쓴다 
+-> 유선(USB or Lan cable)으로 연결해서 개발하면 되지않을까..? -> 어렵다....
+-> 통신을 위해 중간 역할을 해주는 드라이버 모듈을 쓰면 간단해진다(고수들이 만들어둠)
 
-인터프리터 랭귀지 (python)
--> 스크립트라고 부른다(.py) / shell 스크립트도 인터프리터 랭귀지..
--> 컴파일 없이 실행된다.
+장치를 연결하는 가장 기본이 되는, 간단한 통신방법
+1. UART 프로토콜, Univversal Asynchronous Receiver/Transmitter
+2. SPI 프로토콜, Serial Peripheral Interface Bus
+3. I2C 프로토콜, Inter-Integrated Circuit
 
-요즘은 거의 하이브리드 방식이다
--> 소스코드를 처음 컴파잉ㄹ 후, 수정 후 컴파일 할 때 일부만 컴파일 해서 동작하는 방식
+2. 무선통신을 하면 되지 않을까?
+-> 365일 24시간 신뢰성을 보장해야하는 환경에서는 안정성이 떨어지기때문에
+무선 통신을 쓸 수 없다.
 
-Python Runtime(실행기) 종류 (인터프리터)
-1.CPython : Python 기본 (씨파이썬, 파이참에서 사용중)
-2.PyPy : CPython 보다 더 빠른 Runtime
+유/무선 프로토콜 종류!
+# 유선통신
+1. UART
+2. SPI
+3. I2C (아이 스퀘어 씨)
+4. CAN
+
+# 무선통신
+1. 적외선
+2. RFID
+3. 블루투스
+4. Wifi
+
+# I2C가 GPIO 연결보다 좋은점
+-> 핀 2개로 다량의 장치를 연결하여 각각 제어할 수 있다.
+
+# SPI
+-> I2C같이 Master/Slave 통신
+!장점
+-> Master가 slave에게 데이터를 전송하면서, 동시에 데이터를 받을 수도 있다
+-> 빠르다, 따라서 주로 고속이 필요한 장치에 쓰임
+!단점
+-> I2C는 2개 핀이 필요했지만 (SCL,SDA)
+-> SPI는 4개 핀 필요 (CS,SCK,MOSI,MISO)
+CS: slave 선택(chip select)
+SCK : 클럭
+MOSI : Master Out Slave In -> 마스터에서 나와서 슬레이브로 들어감
+MISO : Master in Slave Out -> 슬레이브에서 나와서 마스터로 들어감

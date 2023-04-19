@@ -13,8 +13,8 @@
 // getID(int x,int y) 500번
 // -> 현재 게임판 기준으로 (x,y)를 지나는 사람의 ID
 // -> 5천만
-//set에서 bs 를 어떻게 쓸건데...
-//index로 접근 가능한 자료구조 필요
+// set에서 bs 를 어떻게 쓸건데... -> upper_bound 활용
+// index로 접근 가능한 자료구조 필요
 
 // lower bound , upper bound 로 풀기
 // https://word.tistory.com/13

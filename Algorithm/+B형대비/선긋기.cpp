@@ -1,12 +1,8 @@
 // add 
 // 각 x마다 hashset, key: y좌표
 // 있으면 오른쪽에 가로선 있는거
-// 2만개, 배열에 삽입
-// pq 20000log20000 = 20000*(1+4*4) =34만
-
 
 // remove hashmap  key:y 값 value: Node(y,x) pointer 의 y값만 변경
-//  
 
 // getCrossCnt(int ID) 500번
 //-> 해당 ID 사람이 y좌표가 10억 도달할때까지 가로선 개수
@@ -14,15 +10,14 @@
 // (20000+17*5000)*500 = 5천만
 // pq에서 빼면 다시 pq에 어떻게 넣어줄건데..NlogN이 또들어
 
-
-
-
 // getID(int x,int y) 500번
 // -> 현재 게임판 기준으로 (x,y)를 지나는 사람의 ID
 // -> 5천만
 //set에서 bs 를 어떻게 쓸건데...
 //index로 접근 가능한 자료구조 필요
-//
+
+// lower bound , upper bound 로 풀기
+// https://word.tistory.com/13
 #ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
 #endif
@@ -30,8 +25,10 @@
 #include <stdio.h>
 
 #include <iostream>
+#include <set>
 #include <map>
 #include <vector>
+#include <cstring>
 using namespace std;
 #define CMD_INIT 100
 #define CMD_ADD 200
@@ -39,184 +36,172 @@ using namespace std;
 #define CMD_CROSS 400
 #define CMD_LINE 500
 
-struct Node {
-    int y, x;
-};
-map<int, int> m; //y, Node*
-vector<Node>arr; // map과 arr모두 x 배열로 만들어서 y들을 따로 관리하기..
-int Size = 0;
-int ans_x;
-int ps(int x, int y) { //해당 x열의 y행에서 아래로 가장가까운 y 출력
-    int left = 0;
-    int right = Size-1;
-    int ans = -1;
-    while (left <= right) {
-        int mid = (left + right) / 2;
-        if (arr[mid].y > y) {
-            if (arr[mid].x == x) {
-                ans = arr[mid].y;
-                ans_x = arr[mid].x + 1;
-            }
-            else if (arr[mid].x == x - 1) {
-                ans = arr[mid].y;
-                ans_x = arr[mid].x;
-            }
-            right = mid - 1;
-        }
-        else {
-            left = mid + 1;
-        }
-    }
-    return ans;
-}
-int ps_id(int x, int y) { //해당 x열의 y행에서 위로 가장 가까운 y출력
-    int left = 0;
-    int right = Size-1;
-    int ans = -1;
-    ans_x = x;
-    while (left <= right) {
-        int mid = (left + right) / 2;
-        if (arr[mid].y < y) {
-            if (arr[mid].x == x) {
-                ans = arr[mid].y;
-                ans_x = arr[mid].x + 1;
-            }
-            else if (arr[mid].x == x - 1) {
-                ans = arr[mid].y;
-                ans_x = arr[mid].x;
-            }
-            left = mid + 1;
-        }
-        else {
-            right = mid - 1;
-        }
-    }
-    return ans;
-}
+
+set<int> m[101]; // key :y
+//set<int,greater<int>> m2[101]; // 내림차순, 큰거 우선
+int Size[101];
+
 void init()
 {
-    m.clear();
-    arr.clear();
-    Size = 0;
-    ans_x = 0;
+	for (int i = 0; i <= 100; i++) {
+		m[i].clear();
+		//m2[i].clear();
+	}
+	memset(Size, 0, sizeof(Size));
 }
 void add(int x, int y)
 {
-    //20000*logN
-    m.insert({ y,x });
+	//200000*logN
+	m[x].insert(y);
+	//m2[x].insert(y);
+	Size[x]++;
 }
 
 void remove(int x, int y)
 {
-    //5000*logN
-    m.erase(y);
+	//5000*logN
+	m[x].erase(y);
+	//m2[x].erase(y);
+	Size[x]--;
 }
+
 int getCrossCnt(int ID) //x==ID, y==0 에서 출발
 {
-    //arr로 옮겨, 2만
-    arr.clear();
-    for (auto it = m.begin(); it != m.end(); it++) {
-        arr.push_back({ it->first,it->second });
-    }
-    //ps 로 찾어 5000*log20000 = 8만 5천
-    Size=arr.size();
-    int cnt = 0;
-    int x = ID;
-    int y = 0;
-    while (1) {
-        y = ps(x, y);
-        x = ans_x;
-        if (y == -1) break;
-        cnt++;
-    }
-    return cnt;
+	//ps 로 찾어 5000*log20000 = 8만 5천
+	int cnt = 0;
+	int x = ID;
+	int y = 0;
+	while (1) {
+		auto ret1 = m[x - 1].upper_bound(y);
+		auto ret2 = m[x].upper_bound(y);
+		
+		if (ret1 == m[x-1].end() && ret2 == m[x].end()) break;
+
+		if (ret1 == m[x - 1].end()) {
+			y = *ret2;
+			x = x+1;
+		}
+		else if (ret2 == m[x].end()) {
+			y = *ret1;
+			x = x -1;
+		}
+		else if (*ret1 < *ret2) {
+			x = x - 1;
+			y = *ret1;
+		}
+		else if (*ret1 > *ret2) {
+			x = x + 1;
+			y = *ret2;
+		}
+		cnt++;
+	}
+	return cnt;
+
 }
 
 int getID(int x, int y)
 {
-    //arr로 옮겨, 2만
-    arr.clear();
-    for (auto it = m.begin(); it != m.end(); it++) {
-        arr.push_back({ it->first,it->second });
-    }
-    Size=arr.size();
-    int dx = x;
-    int dy = y;
-    while (1) {
-        dy = ps_id(dx, dy);
-        dx = ans_x;
-        if (dy == -1) break;
-    }
-    return dx;
+	//arr로 옮겨, 2만
+	int dx = x;
+	int dy = y;
+	while (1) {
+		auto ret1 = m[dx-1].lower_bound(dy);
+		auto ret2 = m[dx].lower_bound(dy);
+		
+		if (ret1==m[dx-1].begin() && ret2 == m[dx].begin()) break;
+		if (ret1 == m[dx-1].begin()) {
+			dy = *(--ret2);
+			dx = dx + 1;
+			continue;
+		}
+		else if (ret2 == m[dx].begin()) {
+			dy = *(--ret1);
+			dx = dx - 1;
+			continue;
+		}
+		ret1--;
+		ret2--;
+		if ( *ret1> *ret2) {
+			dy = *ret1;
+			dx = dx - 1;
+		}
+		else if (*ret1 < *ret2) {
+			dy = *ret2;
+			dx = dx + 1;
+		}
+	}
+	return dx;
 }
 
 static bool run()
 {
-    int numQuery;
+	int numQuery;
 
-    int x, y, ID;
+	int x, y, ID;
 
-    int userAns, ans;
+	int userAns, ans;
 
-    bool isCorrect = false;
+	bool isCorrect = false;
 
-    scanf("%d", &numQuery);
+	scanf("%d", &numQuery);
 
-    for (int i = 0; i < numQuery; ++i)
-    {
-        int cmd;
-        scanf("%d", &cmd);
+	for (int i = 0; i < numQuery; ++i)
+	{
+		int cmd;
+		scanf("%d", &cmd);
 
-        switch (cmd)
-        {
-        case CMD_INIT:
+		switch (cmd)
+		{
+		case CMD_INIT:
 
-            init();
-            isCorrect = true;
-            break;
-        case CMD_ADD:
-            scanf("%d %d", &x, &y);
-            add(x, y);
-            break;
-        case CMD_REMOVE:
-            scanf("%d %d", &x, &y);
-            remove(x, y);
-            break;
-        case CMD_CROSS:
-            scanf("%d", &ID);
-            userAns = getCrossCnt(ID);
-            scanf("%d", &ans);
-            if (userAns != ans)
-            {
-                isCorrect = false;
-            }
-            break;
-        case CMD_LINE:
-            scanf("%d %d", &x, &y);
-            userAns = getID(x, y);
-            scanf("%d", &ans);
-            if (userAns != ans)
-                isCorrect = false;
-            break;
-        }
-    }
-    return isCorrect;
+			init();
+			isCorrect = true;
+			break;
+		case CMD_ADD:
+			scanf("%d %d", &x, &y);
+			add(x, y);
+			break;
+		case CMD_REMOVE:
+			scanf("%d %d", &x, &y);
+			//remove(x, y);
+			break;
+		case CMD_CROSS:
+			scanf("%d", &ID);
+			//userAns = getCrossCnt(ID);
+			//cout << userAns << '\n';
+			scanf("%d", &ans);
+			if (userAns != ans)
+			{
+				isCorrect = false;
+			}
+			break;
+		case CMD_LINE:
+			scanf("%d %d", &x, &y);
+			//userAns = getID(x, y);
+			//cout << userAns << '\n';
+			scanf("%d", &ans);
+			if (userAns != ans)
+				isCorrect = false;
+			break;
+		}
+	}
+	return isCorrect;
 }
 
 int main()
 {
-    //freopen("input.txt", "r", stdin);
+	//freopen("input.txt", "r", stdin);
 
-    int T, MARK;
-    scanf("%d %d", &T, &MARK);
+	int T, MARK;
+	scanf("%d %d", &T, &MARK);
 
-    for (int tc = 1; tc <= T; tc++)
-    {
-        int score = run() ? MARK : 0;
-        printf("#%d %d\n", tc, score);
-    }
+	for (int tc = 1; tc <= T; tc++)
+	{
+		int score = run() ? MARK : 0;
+		printf("#%d %d\n", tc, score);
+	}
 
-    return 0;
+	return 0;
 }
 /*
 1 100

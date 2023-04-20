@@ -60,12 +60,14 @@ struct Room{
     int price;
 };
 vector<Room*>hotel[1001];
-Room v[100001];
+Room r[100001];
 int Size[1001];//각 호텔의 방 개수
 int room_cnt;
-//segment tree 20000 -> 200000정도
+//segment tree 10000 -> 200000정도
 //각 구간에 room id가 겹치는지만 확인->set
-unordered_set<int>st[200000]; //key : room id
+unordered_set<int>segment[100000]; //key : room id
+int segment_idx=0;
+
 int cond_index;
 void init(int N, int roomCnt[]) {
     for(int i=1;i<=N;i++){
@@ -92,15 +94,38 @@ void addRoom(int hotelID, int roomID, int roomInfo[]) {
         condition*=100;
         condition+=roomInfo[i];
     }
-    v[room_cnt]={hotelID,roomID,condition,roomInfo[4]};
-    hotel[hotelID].push_back(&v[room_cnt]); //해당 호텔의 방을 주소로 저장
+    r[room_cnt]={hotelID,roomID,condition,roomInfo[4]};
+    hotel[hotelID].push_back(&r[room_cnt]); //해당 호텔의 방을 주소로 저장
     if(condition_map.find(condition)==condition_map.end()){
         condition_map.insert({condition,cond_vector[cond_index++]});
     }
-    condition_map[condition].push_back(v[room_cnt]);
+    condition_map[condition].push_back(r[room_cnt]);
     room_cnt++;
 }
-
+//Segment Tree
+//index 는 1부터
+int st_find(int start,int end,int from,int index,int to,int id){
+    if(start>to||end<from) return 0;
+    if(from<=start&&end<=to){
+        if(segment[index].find(id)==segment[index].end()) return 0;
+        return 1;
+    }
+    int mid=(start+end)/2;
+    
+    return st_find(start,mid,from,to,index*2,id)+st_find(mid+1,end,from,to,index*2+1,id);
+}
+void st_add(int start,int end,int from,int index,int to,int id){
+    if(start>to||end<from) return;
+    if(from<=start&&end<=to){
+        if(segment[index].find(id)==segment[index].end()) segment[index].insert(id);
+    }
+    int mid=(start+end)/2;
+    if(start==end){
+        return;
+    }
+    st_add(start,mid,from,to,index*2,id);
+    st_add(mid+1,end,from,to,index*2+1,id);
+}
 int findRoom(int requirements[]) { //만번
     int start=requirements[0];
     int end=requirements[1];
@@ -109,17 +134,26 @@ int findRoom(int requirements[]) { //만번
         condition*100;
         condition+=requirements[2+i];
     }
-    int index=
+    int idx=0;
+    if(condition_map.find(condition)==condition_map.end()) return -1;
+    Room temp=condition_map[condition][idx];
+    int id=-1;
     while(1){
-        int id=
-        int ret=s(start,end,); //0이면 가능 1이면 불가능
-
+        if(condition_map[condition].size()<=idx) return -1;
+        Room temp=condition_map[condition][idx++];
+        id=temp.rid;
+        int ret=st_find(1,10000,start,end,1,id); //0이면 가능 1이면 불가능
+        if(ret==0){
+            st_add(1,10000,start,end,1,id);
+            break;
+        }
     }
-    
-
-    return 0;
+    return id;
 }
 
 int risePrices(int hotelID) {
+    for(int i=0;i<Size[hotelID];i++){
+        hotel[hotelID][i]->price+=hotel[hotelID][i]->price/10;
+    }
     return 0;
 }

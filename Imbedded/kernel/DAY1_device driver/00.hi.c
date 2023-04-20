@@ -4,7 +4,8 @@
 
 #include <linux/module.h>
 
-MODULE_LICENSE("GPL")
+MODULE_LICENSE("GPL");
+// GPL : 오픈 라이센스
 
 // 권장사항
 // 커널 내부 모듈끼리 함수 중복을 피하기 위해 함수명을 모듈 이름_역할 형태로 사용

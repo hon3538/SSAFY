@@ -13,16 +13,22 @@ struct Person {
 struct cmp {
 	bool operator()(int a, int b)const {
 		if (p[a].point == p[b].point) return p[a].id < p[b].id;
-		return p[a].point < p[a].point;
+		return p[a].point > p[b].point;
 	}
 };
-map<int, Person*,cmp>train[10]; //0~9 , key :pid, value person*
+map<int, Person*, cmp>train[10]; //0~9 , key :pid, value person*
 vector<Person*> jobs[1000]; //0~999, index :jid, value person*
 
 int p_total; // 총 사람 수
 int p_unit; // 한칸당 사람 수
 void init(int N, int M, int J, int Point[], int JobID[])
 {
+	for (int i = 0; i < 10; i++) {
+		train[i].clear();
+	}
+	for (int i = 0; i < 1000; i++) {
+		jobs[i].clear();
+	}
 	p_total = N;
 	p_unit = M;
 	//N명 탑승객 , M명씩 열차 탑승 , 열차 최대 10칸
@@ -72,7 +78,7 @@ int move(int num)
 			//앞부분 앞에 보낼 것 저장
 			for (int n = 0; n < num; n++) {
 				front[i].push(train[i].begin()->first);
-				train[i].erase(train[i].begin());
+				train[i].erase(train[i].begin()->first);
 			}
 		}
 		//마지막 제외

@@ -1,0 +1,20 @@
+라즈베리파이4 bcm2711  datasheet 참고해서 주소 찾기
+
+주소 구하기
+legacy main peripheral base주소: 0x7c00 0000
+Low peripheral mode(가상) base주소: 0xFc00 0000
+
+legacy gpio address : 0x7e200000
+offset : 0x7e20 0000-0x7c00 0000 = 0x0220 0000
+
+가상 gpio 주소 : 0xFc00 0000 + 0x0220 0000 = 0xFe20 0000
+
+ex)
+GPFSEL0(0x00)
+-> 8:6 FSEL2 
+GPIO_PUP_PDN_CNTRL_REG0 Register (0xe4)
+-> 05:04 GPIO_PUP_PDN_CNTRL02
+
+GPFSEL1(0x04)
+-> 23:21 FSEL17
+-> 03:02 GPIO_PUP_PDN_CNTRL17

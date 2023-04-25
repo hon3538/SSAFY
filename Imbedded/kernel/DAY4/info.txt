@@ -1,0 +1,65 @@
+부트로더
+
+# 부트로더를 배우는 이유
+: 기존의 Device driver를 개발할 떄, 준비할 게 많다
+( app, device file, device driver, hw)
+-> 부트로더에서는 app/device file 이 필요 없다.
+ 따라서, hw랑 echo.c를 수정한 테스트 코드만 있으면 
+ OS진입전에 h/w 접근이 가능해서 테스트가 가능하다
+
+-> 개발속도가 빠르다
+
+U-boot, Universal Boot Loader란?
+: 임베디드 리눅스 개발에 가장 많이 쓰이는 Open Bootloader
+-> USB, TCP/IP, Flash 제어 가능
+
+# 라즈베리파이의 부트로더
+: U-boot가 아닌 전용 부트로더가 존대한다
+-> 부트로더 변경 불가능하도록 설계 됨
+
+라즈베리파이가 리눅스 커널을 동작시키는 것 대신 U-boot을 동작시켜보자
+
+실습순서
+1. UART 동작 테스트 (Rpi4)
+2. U-boot Build 하기 (이미지 만들기)
+3. U-boot 동작 테스트
+
+
+
+
+전체 Process
+1. Rpi4 를 Uart serial 연결
+2. U-boot 빌드를 위한 필수 도구 설치 (linux, Rpi4 둘다)
+-> sudo apt install git vim gcc
+-> sudo apt install bc bison flex libssl-dev make libc6-dev
+-> sudo apt install libncurses5-dev
+-> sudo apt install crossbuild-essential-armhf (크로스컴파일 툴체인 설치)
+
+3. u-boot 소스코드 다운로드 (linux, Rpi4)
+-> git clone https://github.com/u-boot/u-boot.git
+
+4. 
+1) cd ./u-boot
+2) sudo vi config.mk 파일 수정
+-> CROSS_COMPILE := arm-linux-gnueabihf- 변수 추가해주기
+
+5. u-boot build 순서
+1) .config 파일 생성하기 (Rpi4, linux)
+-> sudo make rpu_4_32b_defconfig -> .config 파일이 생성됨
+2) make 로 build 하기 (Rpi4만 진행)
+-> sudo make -j4 (코어 갯수에 맞도록)
+-> u-boot.bin 파일 생성
+-> sudo cp ./u-boot.bin /boot/
+-> /boot 디렉토리 이동후 확인
+6. 이제 Rpi4가 u-boot.bin으로 부팅하도록 config.txt를 수정
+1) sudo vi ./config.txt 
+-> kernel=u-boot.bin 을 가장 아래 추가해주기
+2) sudo shutdown -h now
+
+7. 부팅 진입 순서
+1) 라즈베리파이 전원제거
+2) UART USB 빼기
+3) 1초 대기
+4) UART USB 연결
+5) 라즈베리파이 전원연결
+6) Serial 로 진입(mobaxterm)

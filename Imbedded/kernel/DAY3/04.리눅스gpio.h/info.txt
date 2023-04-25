@@ -1,0 +1,14 @@
+GPIO가 리눅스에서 표준화 되어 있다.
+커널에서 쓸 수 있는 API가 지원된다
+#include <linux/gpio.h>
+
+gpio_request (핀번호 , 라벨) : gpio 핀 사용
+gpio_free (핀번호 ) : gpio 핀 사용 해제
+gpio_direction_input( 핀번호 ) : gpio 핀 입력 설정
+gpio_direction_output( 핀번호 , 0) : gpio 핀 출력 설정
+gpio_set_value( 핀번호 , 0 또는 1) : gpio 핀 출력 값 설정
+gpio_get_value( 핀번호 ) : gpio 핀 입력 값 읽기
+gpio_to_irq( 핀번호 ) : gpio 핀에 대한 IRQ 번호 읽기
+
+
+직접 주소로 접근하지 않아도 된다..

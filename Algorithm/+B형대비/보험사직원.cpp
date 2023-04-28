@@ -97,8 +97,6 @@ void update(int t) {
             cur = event[id].city;
             continue;
         }
-        int gap = t - start;
-        cur = p[cur][event[id].city][gap];
         break;
     }
 }
@@ -124,6 +122,10 @@ void cancel(int timeStamp, int caseID) {
 // 10만번
 int position(int timeStamp) {
     update(timeStamp);
+    //cur를 최근 list에서 timeStemp 까지 시간 계산해서
+    //다음 cur를 update 해주고 return 하기
+
+    //아직 구현 안함.
     return cur;
 }
 

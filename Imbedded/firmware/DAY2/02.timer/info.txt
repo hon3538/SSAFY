@@ -1,0 +1,28 @@
+사용할 타이머 선택TIM1~4
+
+Trigger Source
+-> 특정 Signal로 timer가 시작됨
+-> 내부 함수를 호출하여 트리거 시킬거면 Disable로 설정
+
+Clock source 
+-> 입력 클럭을 무엇으로 할지 설정
+-> Internal clock 설정시 : 정확한 시간에 주기적으로 Interrupt를 발생시킬 수 있음
+-> ETR2 사용시 : ETR2 PIN에 들어오는 Signal 횟수에 따라 Interrupt를 발생시킬 수 있음
+
+Timer 속도 조절 방법
+-> Prescaler 로 Timer가 동작되는 속도 지정 가능
+-> 클럭에 나눗셈하기
+-> ex) 시스템 클럭이 8Mhz이면 1/8x10^6 이 한 클럭당 걸리는 시간..
+-> 8000으로 프리스케일 설정시 8Mhz / 8000 = 1Khz -> 1ms 로 설정가능
+
+Count Period
+-> 1000을 입력했다면 1000번 Clock이 뛸때마다 Interrupt가 발생
+-> 프리스케일러로 클럭을 1ms 마다 뛰게 해놨으니 1000으로 설정시 1초에 한번 발생
+
+NVIC setting에서 Interrupt Enabled check
+-> Timer Update가 되면 Interrupt 발생
+
+stm32f1xx_it.c 에서 Timer 핸들러 찾기
+main.c에 차이머 시작함수를 추가
+xxxx_tim.c 파일에서 HAL_TIM_PeriodElapsedCallback() 함수를 찾아서
+main.c 의 전처리(전역)자리에 필요한 동작으로 재정의 시킴

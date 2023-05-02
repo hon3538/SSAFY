@@ -1,0 +1,3 @@
+chip select 했을 때 clock 설정이 안맞으면 build - debug - resume 했을 때
+init 에서 안 넘어갈 수 있음
+-> clock LOCO로 맞췄더니 됨

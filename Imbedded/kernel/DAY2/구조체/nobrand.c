@@ -38,6 +38,7 @@ static long nobrand_ioctl(struct file *filp, unsigned int cmd, unsigned long arg
             printk(KERN_INFO "Copy from user struct!");
             ret= copy_from_user(&(t.n), (void*)arg,1);
             ret=copy_from_user(t.buf, (void*)(arg+1),100);
+            //ret=copy_from_user(t)
             printk(KERN_ALERT "struct n : %d",t.n);
             printk(KERN_ALERT "struct buf : %s",t.buf);
             break;

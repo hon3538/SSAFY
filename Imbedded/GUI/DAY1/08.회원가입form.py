@@ -5,7 +5,7 @@ win=QWidget()
 def check():
     if int(line2.text()) >= 25:
         lbl.setVisible(True)
-        return;
+        return
     lbl.setVisible(False)
     btn2.setVisible(True)
 

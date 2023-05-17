@@ -63,7 +63,7 @@ void btn_falling(){
 void setup() {
   Serial.begin(115200);  //Initialize serial
   while (!Serial) {
-    ; // wait for serial port to connect. Needed for Leonardo native USB port only
+     // wait for serial port to connect. Needed for Leonardo native USB port only
   }
   
   WiFi.mode(WIFI_STA);   
@@ -80,7 +80,7 @@ void setup() {
   //btn
   pinMode(btn,INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(btn),btn_rising,RISING);
-  attachInterrupt(digitalPinToInterrupt(btn),btn_falling,FALLING);
+  // attachInterrupt(digitalPinToInterrupt(btn),btn_falling,FALLING);
 }
 
 void loop() {

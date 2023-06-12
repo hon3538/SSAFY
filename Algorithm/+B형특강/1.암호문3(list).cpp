@@ -62,7 +62,6 @@ public:
 			cnt++;
 			now = now->next;
 		}
-		//addNode(now, data);
 		return now;
 	}
 	void delInOrder(int order, int num) {

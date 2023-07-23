@@ -21,47 +21,45 @@ void input() {
     cin >> list_length >> q;
     // arr 
     int n;
-    for (int i = 1; i <= list_length; i++) {
-        cin >> n;
-        //list[i] = list[i - 1] + n;
-        list[i] = n;
+    for (int i = 0; i < list_length; i++) {
+        cin >> list[i];
     }
 }
 //segment tree initial
 //왼쪽 구간, 오른쪽 구간 의 각각의 min max 값
 
-Node initializeSeg(int left, int right, int index) {
-   // segmentTree[index] = list[right] - list[left - 1];
+void initializeSeg(int left, int right, int index) {
+    // segmentTree[index] = list[right] - list[left - 1];
     if (left == right) {
         stNode[index].max = list[right];
         stNode[index].min = list[right];
-        return stNode[index];
+        return;
     }
     int mid = (left + right) / 2;
-    Node l = initializeSeg(left, mid, index * 2); //left
-    Node r = initializeSeg(mid + 1, right, index * 2 + 1); //right
+    initializeSeg(left, mid, index * 2); //left
+    initializeSeg(mid + 1, right, index * 2 + 1); //right
 
-    stNode[index].max = max(l.max, r.max);
-    stNode[index].min = min(l.min, r.min);
-    return stNode[index];
+    stNode[index].max = max(stNode[index*2].max, stNode[index*2+1].max);
+    stNode[index].min = min(stNode[index*2].min, stNode[index*2+1].min);
+    return;
 }
 //target index 의 숫자를 target num으로 바꾼다
-Node update(int target_index, int target_num, int left, int right, int index) {
-    if (target_index < left || target_index > right) return { -1, MAX };
+void update(int target_index, int target_num, int left, int right, int index) {
+    if (target_index < left || target_index > right) return;
     //segmentTree[index] += (target_num - list[target_index]);
     if (left == right) { // 이곳이 target_index 이므로 list 실제 업데이트해주고 return
         //list[target_index] = target_num;
         stNode[index].max = target_num;
         stNode[index].min = target_num;
-        return stNode[index];
+        return;
     }
-
     int mid = (left + right) / 2;
-    Node l = update(target_index, target_num, left, mid, index * 2);
-    Node r = update(target_index, target_num, mid + 1, right, index * 2 + 1);
-    stNode[index].max = max(l.max, r.max);
-    stNode[index].min = min(l.min, r.min);
-    return stNode[index];
+    update(target_index,target_num,left,mid,index*2);
+    update(target_index,target_num,mid+1,right,index*2+1);
+
+    stNode[index].max = max(stNode[index*2].max, stNode[index*2+1].max);
+    stNode[index].min = min(stNode[index*2].min, stNode[index*2+1].min);
+    return;
 }
 Node getGap(int left, int right, int index, int t_left, int t_right) {
     // 해당 범위에서 max, min 값 찾기
@@ -79,14 +77,13 @@ void query(int t) {
     for (int i = 0; i < q; i++) {
         int n, a, b;
         cin >> n >> a >> b;
-        a++;
         if (n == 0) {
             //a index 값을 b로 변경
-            update(a, b, 1, list_length, 1);
+            update(a, b, 0, list_length-1, 1);
         }
         else {
             //a~b-1 중 max - min 을 출력
-            Node ret = getGap(1, list_length, 1, a, b);
+            Node ret = getGap(0, list_length-1, 1, a, b-1);
             ans.push_back(ret.max - ret.min);
         }
     }
@@ -103,7 +100,7 @@ int main() {
         //input
         input();
         //init
-        initializeSeg(1, list_length, 1);
+        initializeSeg(0, list_length-1, 1);
         //query
         query(t);
     }

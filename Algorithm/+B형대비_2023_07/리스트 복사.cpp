@@ -24,6 +24,7 @@ link = 부모의 vector size -1 을 넣는다.
 #include <iostream>
 #include <unordered_map>
 #include <vector>
+#include <string>
 using namespace std;
 
 #define MAX_SIZE 200001
@@ -42,20 +43,27 @@ struct List {
     }
 };
 List listInfo[5050]; // 최대 list 개수 5010개
-unordered_map<char*, int> nameToIndex; //list 이름을 index로 치환
-int list_index = 0; // 현재까지 독립 list 개수
+unordered_map<string, int> nameToIndex; //list 이름을 index로 치환
+ // makeList가 처음 10번 연속 실행되는 것이 아니므로 따로 origin index를 관리하지 않으면
+ // 복사된 list가 origin index(0~10) 을 가질 수 있다..
+int origin_index = 0;
+int list_index = 10; // 현재까지 독립 list 개수
 int originList[10][MAX_SIZE]; // root list 개수
 
 void init() {
     nameToIndex.clear();
-    list_index = 0;
+    origin_index = 0;
+    list_index = 10; // 초기화 잘줄것.. 0으로 줬어서 고생함
 }
 void makeList(char mName[], int mLength, int mListValue[]) {
-    if (nameToIndex.find(mName) == nameToIndex.end()) {
+    string name = string(mName); 
+    //string 아니고 char*을 key로 주면 주소값을 넘기기 때문에
+    //값이 같아도 다른 hash값을 가짐..
+    if (nameToIndex.find(name) == nameToIndex.end()) {
         //없으면
-        nameToIndex.insert({ mName,list_index++ });
+        nameToIndex.insert({ name,origin_index++ });
     }
-    int index = nameToIndex[mName];
+    int index = nameToIndex[name];
     listInfo[index].parrent = -1;
     listInfo[index].link = -1;
     listInfo[index].update_list.clear();
@@ -64,31 +72,38 @@ void makeList(char mName[], int mLength, int mListValue[]) {
     }
 }
 void copyList(char mDest[], char mSrc[], bool mCopy) {
+    string dest = string(mDest);
+    string src = string(mSrc);
     if (mCopy) { //전체 복사
-        nameToIndex.insert({ mDest,list_index++ });
-        int index = nameToIndex[mDest];
-        int parrent = nameToIndex[mSrc];
+        nameToIndex.insert({ dest,list_index++ });
+        int index = nameToIndex[dest];
+        int parrent = nameToIndex[src];
         listInfo[index].parrent = parrent;
         listInfo[index].link = listInfo[parrent].update_list.size() - 1;
         listInfo[index].update_list.clear();
     }
     else { //주소만 복사
-        nameToIndex.insert({ mDest,nameToIndex[mSrc] });
+        nameToIndex.insert({ mDest,nameToIndex[src] });
     }
 }
 void updateElement(char mName[], int mIndex, int mValue) {
-    int index = nameToIndex[mName];
+    string name = string(mName);
+    int index = nameToIndex[name];
     listInfo[index].update_list.push_back({ mIndex,mValue });
 }
 int element(char mName[], int mIndex) {
-    int index = nameToIndex[mName];
-    int parrent = 0;
+    string name = string(mName);
+    int index = nameToIndex[name];
+    int parrent = listInfo[index].parrent;
     int size = listInfo[index].update_list.size() - 1;
-    while (parrent != -1 && size < 0) { // root 이고 update list 없으면 나가
+    // parrent != -1 && size < 0 으로 줬었음.. 반복문이 돌아갈 수 있는 조건을 넣을것!
+    while (parrent != -1 || size >= 0) { // root 이고 update list 없으면 나가
+        //cout << size << '\n';
         if (size < 0) {
+            size = listInfo[index].link; 
             index = parrent;
             parrent = listInfo[index].parrent;
-            size = listInfo[index].link;
+            //size = listInfo[index].link; 변경된 index의 link를 넣어줘서 고생함;
             continue;
         }
         // 찾았으면 해당 값 return

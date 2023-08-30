@@ -26,6 +26,8 @@ int main() {
             string input;
             getline(cin, input);
             bool flag = false;
+            // 1 A 2 3
+            // 바로 index로 접근하면 안 됨, 11 B 22 23 일케 들어오면 input[2]==' ' 로 공백이 됨
             for (char c : input) {
                 if (flag) {
                     nodeList[i + 1] = c;

@@ -3,3 +3,4 @@
 .weights
 .cfg
 node_modules
+__pycache*
